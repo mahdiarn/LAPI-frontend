@@ -1,0 +1,25 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import MaskedInput from 'react-text-mask';
+
+function NPWPTextFormat(props) {
+    const { inputRef, ...other } = props;
+  
+    return (
+      <MaskedInput
+        {...other}
+        ref={ref => {
+          inputRef(ref ? ref.inputElement : null);
+        }}
+        mask={[/\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, '-', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/,]}
+        placeholderChar={'\u2000'}
+        showMask
+      />
+    );
+  }
+  
+  NPWPTextFormat.propTypes = {
+    inputRef: PropTypes.func.isRequired,
+  };
+
+  export default NPWPTextFormat
