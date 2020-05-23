@@ -95,7 +95,7 @@ function Navbar({email, role, title}){
 
   const changeUnreadNotification = async (e) => {
     history.push(`/proyek/${e.proyek_id}`)
-    const response = await APIBuilder(`notification/${e.id}/read`)
+    await APIBuilder(`notification/${e.id}/read`)
   }
   return(
     <Grid container>
