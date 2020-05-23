@@ -50,7 +50,12 @@ class DaftarProyek extends React.Component {
     }
     validateToken()
     const response = await APIBuilder('proyek')
-    if (response.code === 200) this.setState({peluangList: response.payload.data, peluangListView: response.payload.data})
+    const {search} = this.props.match.params
+    if ((response.code === 200) && (search)) {
+      this.setState({peluangList: response.payload.data, peluangListView: response.payload.data, searchProyek: search, filter: 1})
+    } else if (response.code === 200) {
+      this.setState({peluangList: response.payload.data, peluangListView: response.payload.data})
+    }
   }
 
   handleChangePage = (event, newPage) => {

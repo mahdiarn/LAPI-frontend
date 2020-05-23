@@ -82,7 +82,6 @@ function MasalahDetail(props) {
     } catch (error) {
       alert('Gagal tambah masalah, Message: '+error)
       setProgressVisibility(false)
-      console.log(error)
     }
   }
 
@@ -130,7 +129,6 @@ function MasalahDetail(props) {
                                 }
                               } catch (error) {
                                 alert('Gagal hapus tenaga masalah, Message: '+error)
-                                console.log(error)
                               }
                             }}>
                               Hapus

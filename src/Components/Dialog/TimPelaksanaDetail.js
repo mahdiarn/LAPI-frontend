@@ -164,7 +164,6 @@ function TimPelaksanaDetail(props) {
                               <Link to={myroute} onClick={async () => {
                                 try {
                                   const removeTenagaAhli = await APIBuilder(`tenaga-ahli/${row.id}/remove`)
-                                  console.log(removeTenagaAhli)
                                   if (removeTenagaAhli.code === 200) {
                                     handleRefresh()
                                   } else {
@@ -172,7 +171,6 @@ function TimPelaksanaDetail(props) {
                                   }
                                 } catch (error) {
                                   alert('Gagal hapus tenaga ahli, Message: '+error)
-                                  console.log(error)
                                 }
                               }}>
                                 Hapus
@@ -245,7 +243,6 @@ function TimPelaksanaDetail(props) {
                         }
                         try {
                           const addTenagaAhli = await APIBuilder(`tenaga-ahli`, payload, 'POST')
-                          console.log(addTenagaAhli)
                           if (addTenagaAhli.code === 200) {
                             handleRefresh()
                           } else {
@@ -253,7 +250,6 @@ function TimPelaksanaDetail(props) {
                           }
                         } catch (error) {
                           alert('Gagal tambah tenaga ahli, Message: '+error)
-                          console.log(error)
                         }
                       }}>
                         Tambah

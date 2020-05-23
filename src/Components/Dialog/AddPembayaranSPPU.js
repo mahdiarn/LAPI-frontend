@@ -69,12 +69,10 @@ function AddPembayaranSPPU(props) {
       jumlah_pembayaran: jumlahPembayaranSPPU,
       status_pembayaran: selectedStatusSPPU,
     }
-    console.log(payload)
 
     const response = await APIBuilder('sppu', payload, 'POST')
     if (response.code !== 200){
       alert('Pembuatan SPPU Gagal!')
-      console.log(response.payload.data)
       return
     }
 

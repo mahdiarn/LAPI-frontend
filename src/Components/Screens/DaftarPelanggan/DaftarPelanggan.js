@@ -7,6 +7,7 @@ import history from '../../../Shared/History'
 import APIBuilder from '../../../Shared/APIBuilder'
 import Constants from '../../../Shared/Constants'
 import Authorization from '../../../Shared/Authorization'
+import PelangganDetailDialog from '../../Dialog/PemberiKerjaSelfDetail'
 
 import Navbar from '../../Navbar/Navbar'
 
@@ -36,6 +37,8 @@ class DaftarPelanggan extends React.Component {
       isBUMN: false,
       isSwasta: false,
       isLainLain: false,
+      selectedPelangganId: 0,
+      pelangganDetailWindow: false,
     }
 
     this.handleChangePage = this.handleChangePage.bind(this)
@@ -43,6 +46,7 @@ class DaftarPelanggan extends React.Component {
     this.handleChangeSearchProyek = this.handleChangeSearchProyek.bind(this)
     this.handleChangeFilter = this.handleChangeFilter.bind(this)
     this.handleCheck = this.handleCheck.bind(this)
+    this.handleTogglePelangganDetailWindow = this.handleTogglePelangganDetailWindow.bind(this)
   }
 
   async componentDidMount() {
@@ -193,13 +197,22 @@ class DaftarPelanggan extends React.Component {
     }
   }
   
-  handleDirectToPengalamanPage = (e) => {
-    history.push('/daftar-pengalaman')
+  handleDirectToDaftarProyekPage = (e) => {
+    history.push('/daftar-proyek')
+  }
+
+  handleTogglePelangganDetailWindow = () => {
+    const { pelangganDetailWindow } = this.state
+    this.setState({ pelangganDetailWindow: !pelangganDetailWindow })
+  }
+
+  setPelangganId = (id) => {
+    this.setState({ selectedPelangganId: id })
   }
 
   render() {
     const {page, rowsPerPage, peluangListView} = this.state
-    const { searchProyek, filter, filterList } = this.state
+    const { searchProyek, filter, filterList, pelangganDetailWindow, selectedPelangganId } = this.state
     const {
       isPemerintahPusat,
       isPemerintahDaerah,
@@ -214,6 +227,12 @@ class DaftarPelanggan extends React.Component {
     })
     return (
       <Grid item container>
+        <PelangganDetailDialog
+          open={pelangganDetailWindow}
+          onClose={() => {this.handleTogglePelangganDetailWindow()}}
+          myroute={this.props.location.pathname}
+          pemberiKerjaId={selectedPelangganId}
+        />
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Daftar Pelanggan'}/>
         <Grid item container justify="center" alignItems="center" style={{ marginTop: '4em', padding: '0 4em'}}>
           <Grid item container justify="center" md={12} alignItems="center" style={{ padding: '15px'}}>
@@ -329,7 +348,10 @@ class DaftarPelanggan extends React.Component {
                         } else if (column.id === 'menu') {
                           return (
                             <TableCell key={column.id+value} align={column.align}>
-                              <Link to={`/`}>Detail</Link>
+                              <Link to={this.props.location.pathname} onClick={() => {
+                                this.setPelangganId(row.id)
+                                this.handleTogglePelangganDetailWindow()
+                              }}>Detail</Link>
                             </TableCell>
                           )
                         } else {

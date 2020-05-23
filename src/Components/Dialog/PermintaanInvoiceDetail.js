@@ -55,7 +55,6 @@ function PermintaanInvoiceDetail(props) {
 
   const getInvoiceNumber = async() => {
     const response = await APIBuilder('counter/invoice')
-    console.log(response)
     if (response.code === 200) setInvoiceNumberInput(response.payload.data + 1)
   }
 
@@ -178,7 +177,6 @@ function PermintaanInvoiceDetail(props) {
 
       if (isCetakInvoice) {
         setProgressVisibility(false)
-        console.log(response)
       } else {
         setProgressVisibility(false)
         handleRefresh()

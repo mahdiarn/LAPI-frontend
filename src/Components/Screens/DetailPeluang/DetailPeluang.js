@@ -167,7 +167,6 @@ class DetailPeluang extends React.Component {
         latestLogMessage: latestLogResponse.payload.data.message || `-`
       })
     } catch (error) {
-      console.log(error)
       history.push('/')
     }
   }

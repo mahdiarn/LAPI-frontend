@@ -66,7 +66,6 @@ function EndProyek(props) {
       nilai_pemberi_kerja: nilaiPemberiKerja,
       nilai_tim_pelaksana: nilaiTimPelaksana
     }
-    console.log(payload)
 
     const options = {
       method: 'POST',
@@ -82,7 +81,6 @@ function EndProyek(props) {
       alert('Berhasil akhiri proyek!')
       setProgressVisibility(false)
     }).catch((err) => {
-      console.log(err)
     })
     return handleClose()
   }

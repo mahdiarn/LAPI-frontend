@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import history from '../../Shared/History'
 
@@ -8,7 +8,9 @@ import home from '../../Assets/icon-home.png'
 import profile from '../../Assets/icon-profile.png'
 
 import Button from '../Button/MainButton'
-import { Typography, Grid, IconButton, Paper, Link} from '@material-ui/core'
+import NotificationButton from '../Button/NotificationButton'
+import NotificationButtonRead from '../Button/NotificationButtonRead'
+import { Typography, Grid, IconButton, Paper, Link, Divider} from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Popper from '@material-ui/core/Popper'
@@ -16,6 +18,7 @@ import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state'
 import Fade from '@material-ui/core/Fade'
 
 import {routesSuperUser, routesPM, routesMK3L, routesKeuangan, routesProfile} from '../../Shared/Config'
+import APIBuilder from '../../Shared/APIBuilder'
 import Constants from '../../Shared/Constants'
 
 const style = {
@@ -48,7 +51,16 @@ const links = {
 }
 
 function Navbar({email, role, title}){
-  
+  const [notificationList, setNotificationList] = useState([])
+  useEffect(() => {
+    async function getNotificationList() {
+      const response = await APIBuilder('notification')
+      if (response.code === 200) {
+        setNotificationList(response.payload.data)
+      }
+    }
+    getNotificationList()
+  }, []) 
   
   const route = (route) => route.map((item) => {
     return (
@@ -80,6 +92,11 @@ function Navbar({email, role, title}){
   }
 
   const classes = useStyles()
+
+  const changeUnreadNotification = async (e) => {
+    history.push(`/proyek/${e.proyek_id}`)
+    const response = await APIBuilder(`notification/${e.id}/read`)
+  }
   return(
     <Grid container>
       <Grid item container style={style} alignItems="center">
@@ -103,12 +120,31 @@ function Navbar({email, role, title}){
                 <div>
                   <IconButton {...bindToggle(popupState)}>
                     <img src={notification} alt="notification-icon" style={iconStyle}/>
+                    {(notificationList.filter((e) => e.is_read === 0)).length}
                   </IconButton>
                   <Popper {...bindPopper(popupState)} transition>
                     {({ TransitionProps }) => (
                       <Fade {...TransitionProps} timeout={350}>
-                        <Paper>
-                          <Typography className={classes.typography}>Notification.</Typography>
+                        <Paper style={{maxHeight:'100px', overflowY:'scroll'}}>
+                          {notificationList.map((e) => {
+                            if (e.is_read) {
+                              return (<div key={`${e.id}${e.proyek_id}`}>
+                                <NotificationButtonRead onClick={() => {history.push(`/proyek/${e.proyek_id}`)}}>
+                                  <Typography className={classes.typography} variant="caption">{e.message}</Typography>
+                                </NotificationButtonRead>
+                                <Divider />
+                              </div>)
+                            } else {
+                              return (<div key={`${e.id}${e.proyek_id}`}>
+                                <NotificationButton onClick={() => {
+                                  changeUnreadNotification(e)
+                                }}>
+                                  <Typography className={classes.typography}  variant="caption">{e.message}</Typography>
+                                </NotificationButton>
+                                <Divider />
+                              </div>)
+                            }
+                          })}
                         </Paper>
                       </Fade>
                     )}
