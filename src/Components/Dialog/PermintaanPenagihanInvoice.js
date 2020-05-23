@@ -63,30 +63,6 @@ function PermintaanPenagihanInvoice(props) {
       alert('Harap Sertakan File')
       return setProgressVisibility(false)
     }
-
-    // const payload = {
-    //   tahapan_terakhir: selectedTahapanTerakhir,
-    //   alasan: alasan,
-    //   nilai_pemberi_kerja: nilaiPemberiKerja,
-    //   nilai_tim_pelaksana: nilaiTimPelaksana
-    // }
-
-    // const options = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `Bearer ${localStorage.getItem('token')}`
-    //   },
-    //   data: JSON.stringify(payload),
-    //   url: `${baseUrl}/proyek/${proyekId}/akhiri`,
-    // }
-    
-    // axios(options).then(() => {
-    //   alert('Berhasil akhiri proyek!')
-    //   setProgressVisibility(false)
-    // }).catch((err) => {
-    //   console.log(err)
-    // })
     let data = new FormData() 
     
     data.append('berita_acara_availability', ketersediaanBeritaAcara)

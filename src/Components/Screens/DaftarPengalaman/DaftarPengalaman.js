@@ -40,7 +40,6 @@ class DaftarPengalaman extends React.Component {
     }
     validateToken()
     const response = await APIBuilder('proyek/archive')
-    console.log(response.payload.data)
     if (response.code === 200) this.setState({peluangList: response.payload.data, peluangListView: response.payload.data})
   }
 
@@ -111,7 +110,6 @@ class DaftarPengalaman extends React.Component {
     let remainingDays = moment(endDate).diff(moment(), 'days')
     if (remainingDays < 0) return '#F00'
     let percentage = ((remainingDays) / contractDays) * 100
-    console.log(contractDays, remainingDays, percentage)
     if (percentage > 60) {
       return '#0F0'
     } else if (percentage < 60 && percentage > 30) {

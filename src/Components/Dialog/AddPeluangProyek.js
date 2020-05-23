@@ -116,7 +116,6 @@ function AddPeluangProyek(props) {
     const response = await APIBuilder('peluang-proyek', payload, 'POST')
     if (response.code !== 200){
       alert('Pembuatan Proyek Gagal!')
-      console.log(response.payload.data)
       return
     }
 

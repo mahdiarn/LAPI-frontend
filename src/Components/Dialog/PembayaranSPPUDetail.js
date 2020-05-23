@@ -58,7 +58,6 @@ function PembayaranSPPUDetail(props) {
   
   const handleSubmit = async (e, isCetakInvoice = false) => {
     setProgressVisibility(true)
-    console.log(value)
     e.preventDefault()
     try {
       const payload = {
@@ -67,7 +66,6 @@ function PembayaranSPPUDetail(props) {
         jumlah_pembayaran: jumlahPembayaranSPPU,
         status_pembayaran: selectedStatusSPPU
       }
-      console.log(payload)
       
       const response = await APIBuilder(`sppu/${value.id}/update`, payload, 'POST')
       if (response.code === 200) {

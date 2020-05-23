@@ -40,6 +40,16 @@ export const daftarPelangganColumns = [
   { id: 'menu', label: 'Menu', minWidth: 170 }
 ]
 
+export const daftarTimColumns = [
+  { id: 'no', label: 'No', minWidth: 50 },
+  { id: 'nama_ketua_pm', label: 'Ketua - PM', minWidth: 170 },
+  { id: 'kelompok_keahlian_nama', label: 'Kelompok Keahlian', minWidth: 170 },
+  { id: 'total_active_project', label: 'Total Proyek Aktif', minWidth: 170 },
+  { id: 'total_project', label: 'Total Proyek', minWidth: 150 },
+  { id: 'cv', label: 'CV', minWidth: 150, align: 'center' },
+  { id: 'menu', label: 'Menu', minWidth: 170 }
+]
+
 export const tenagaAhliColumns = [
   { id: 'nama', label: 'Nama Lengkap', minWidth: 170, align: 'center' },
   { id: 'posisi', label: 'Posisi', minWidth: 50, align: 'center' },

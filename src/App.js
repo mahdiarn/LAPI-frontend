@@ -45,6 +45,7 @@ class App extends React.Component {
           <Route path="/tambah-role" exact component={TambahRoleScreen} />
           <Route path="/daftar-peluang" exact component={DaftarPeluangScreen} />
           <Route path="/daftar-proyek" exact component={DaftarProyekScreen} />
+          <Route path="/daftar-proyek/:search" exact component={DaftarProyekScreen} />
           <Route path="/daftar-pengalaman" exact component={DaftarPengalamanScreen} />
           <Route path="/daftar-pelanggan" exact component={DaftarPelangganScreen} />
           <Route path="/daftar-tim" exact component={DaftarTimScreen} />
