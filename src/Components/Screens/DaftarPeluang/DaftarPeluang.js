@@ -288,7 +288,7 @@ class DaftarPeluang extends React.Component {
       <Grid item container>
         <AddPeluangDialog open={addPeluangWindow} onClose={this.handleToggleAddPeluangWindow}/>
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Daftar Peluang'}/>
-        <Grid item container justify="center" alignItems="center" style={{ marginTop: '.5em', padding: '0 4em'}}>
+        <Grid item container justify="center" alignItems="center" style={{ marginTop: '.5em', padding: (window.innerWidth <= 600) ? '0' : '0 4em'}}>
           <Grid item container justify="center" md={12} alignItems="center" style={{ padding: '15px'}}>
             <Grid item container justify="flex-start" md={12} alignItems="center" style={{ padding: '15px'}}>
               <Grid item container justify="flex-start" md={3} style={{ padding: '15px'}}>
@@ -322,7 +322,7 @@ class DaftarPeluang extends React.Component {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item container justify="flex-start" alignItems="center" style={{ padding: '0 4em'}}>
+          <Grid item container justify="flex-start" alignItems="center" style={{ padding: (window.innerWidth <= 600) ? '0' : '0 4em'}}>
             <Grid item container justify="flex-start" alignItems="center" md={2} style={{ padding: '15px'}}>
               <Checkbox
                 checked={isKonsultanChecked}
@@ -368,7 +368,7 @@ class DaftarPeluang extends React.Component {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item container justify="flex-start" alignItems="center" style={{ padding: '0 4em'}}>
+          <Grid item container justify="flex-start" alignItems="center" style={{ padding: (window.innerWidth <= 600) ? '0' : '0 4em'}}>
             <Grid item container justify="flex-start" alignItems="center" md={3} style={{ padding: '15px'}}>
               <Checkbox
                 checked={isPemilihanLangsungChecked}
@@ -425,7 +425,7 @@ class DaftarPeluang extends React.Component {
               </Typography>
             </Grid>
           </Grid>
-          <Paper>
+          <Paper style={{ overflowX: "auto" }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
