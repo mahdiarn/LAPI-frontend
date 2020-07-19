@@ -826,7 +826,7 @@ class DetailProyek extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 4) ? (<Button onClick={this.toggleDetailEditMode}>{editDetailMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 4) ? (<Button onClick={this.toggleDetailEditMode} style={{padding: '0 0'}}>{editDetailMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -896,7 +896,7 @@ class DetailProyek extends React.Component {
                       </Typography></Grid>
                     </Grid>
                     <Grid container justify="flex-end" alignItems="center">
-                      <Grid item>{(Authorization.getRole() === 5 && proyek && proyek.status === 4) ? (<Button onClick={this.toggleKontrakSP3EditMode}>{editKontrakSP3Mode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                      <Grid item>{(Authorization.getRole() === 5 && proyek && proyek.status === 4) ? (<Button onClick={this.toggleKontrakSP3EditMode} style={{padding: '0 0'}}>{editKontrakSP3Mode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                     </Grid>
                     <br />
                   </div>
@@ -995,7 +995,7 @@ class DetailProyek extends React.Component {
                     <Grid item container md={6} alignItems="center">
                       <Typography align="left">: {(proyek) ? (proyek.tanggal_pemberian_prefinancing) ? 'Ada' : 'Tidak Ada' : 'Tidak Ada'}</Typography>
                       &nbsp;&nbsp;
-                      <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px'}} onClick={() => {
+                      <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 0'}} onClick={() => {
                         this.handleTogglePrefinancingDetailWindow()
                       }}>
                         Lihat
@@ -1006,7 +1006,7 @@ class DetailProyek extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.togglePemberiKerjaEditMode}>{editPemberiKerjaMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.togglePemberiKerjaEditMode} style={{padding: '0 0'}}>{editPemberiKerjaMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -1132,7 +1132,7 @@ class DetailProyek extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.toggleTimEditMode}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 0'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -1248,7 +1248,7 @@ class DetailProyek extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.toggleTimEditMode}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 0'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
             </Grid>  
