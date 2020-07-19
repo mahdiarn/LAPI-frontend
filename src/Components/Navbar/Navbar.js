@@ -62,12 +62,23 @@ function Navbar({email, role, title}){
     getNotificationList()
   }, []) 
   
-  const route = (route) => route.map((item) => {
-    return (
-      <Link onClick={() => {history.push(item.url)}} key={item.name+'-key'}>
-        {`\u00A0${item.name}\u00A0`}
-      </Link>
-    )
+  const route = (route) => route.map((item, key) => {
+    if (
+      key === route.length-1
+    ) {
+      return (
+        <Link onClick={() => {history.push(item.url)}} key={item.name+'-key'}>
+          {`\u00A0${item.name}\u00A0`}
+        </Link>
+      )
+    } else {
+      return (
+        <Link onClick={() => {history.push(item.url)}} key={item.name+'-key'}>
+          {`\u00A0${item.name}\u00A0`}|
+        </Link>
+      )  
+    }
+    
   })
 
   function routesFilter(role) {
