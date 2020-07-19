@@ -154,6 +154,9 @@ function PermintaanInvoiceDetail(props) {
         ) {
           throw "insufficent-input-cetak"
         }
+        if (isNaN(Number(invoiceNumberInput))) {
+          throw "invalid-invoice-number"
+        }
         payload.invoice_number = invoiceNumberInput
         payload.attention = attentionInput
         payload.invoice_label = labelInput
@@ -190,6 +193,9 @@ function PermintaanInvoiceDetail(props) {
         case "insufficent-input-cetak":
             alert('Tolong lengkapi form cetak invoice!')
             break
+        case "invalid-invoice-number":
+            alert('Input nomor invoice harus angka!')
+            break
         case "failed":
         default:
           alert('Gagal ubah data permohonan penagihan invoice!')
@@ -219,11 +225,13 @@ function PermintaanInvoiceDetail(props) {
         <Grid item container alignItems="center" justify="space-between" spacing={2}>
           <Grid item md={4}>Berita Acara</Grid>
           <Grid item md={6}>
-            {transformBeritaAcaraStatus(value.berita_acara_status)} {(urlFile.length > 0) ? (
-              <Link to={myroute} onClick={() => {window.open(`${urlFile}`,`_blank`)}}>(Lihat File)</Link>
-            ) : (
-              <div />
-            )}
+            {transformBeritaAcaraStatus(value.berita_acara_status)} {
+              (value.berita_acara_status === Constants.BERITA_ACARA_ADA) ? (
+                <Link to={myroute} onClick={() => {window.open(`${urlFile}`,`_blank`)}}>(Lihat File)</Link>
+              ) : (
+                <div />
+              )
+            }
           </Grid>
           <Grid item md={2}>&nbsp;</Grid>
         </Grid>
