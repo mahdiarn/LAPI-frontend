@@ -81,7 +81,7 @@ class TerminProyek extends React.Component {
 
   handleChangeTerminPage = (event, newTerminPage) => {
     this.setState({
-      logPage: newTerminPage
+      terminPage: newTerminPage
     })
   }
 
