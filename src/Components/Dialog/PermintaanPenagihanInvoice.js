@@ -119,7 +119,7 @@ function PermintaanPenagihanInvoice(props) {
         </Grid>
         <Grid item container alignItems="center" justify="space-between" spacing={2}>
           <Grid item md={4}>Termin ke-</Grid>
-          <Grid item md={8}><Typography>: {termin.id}</Typography></Grid>
+          <Grid item md={8}><Typography>: {termin.termin_ke}</Typography></Grid>
         </Grid>
         <Grid item container alignItems="center" justify="space-between" spacing={2}>
           <Grid item md={4}>Persentase Proyek</Grid>
