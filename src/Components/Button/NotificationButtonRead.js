@@ -14,7 +14,8 @@ const NotificationButton = withStyles(theme => ({
     paddingTop: 7,
     paddingBottom: 7,
     paddingLeft: 15,
-    paddingRight: 15
+    paddingRight: 15,
+    width: "100%",
   },
 }))(Button)
 
