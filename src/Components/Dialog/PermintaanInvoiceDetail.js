@@ -173,12 +173,12 @@ function PermintaanInvoiceDetail(props) {
       if (response.code === 200) {
         alert('Berhasil ubah data permohonan penagihan invoice!')
         setInvoiceUrl(response.payload.url)
-        setAlertCetakInvoice(true)
       } else {
         throw "failed"
       }
 
       if (isCetakInvoice) {
+        setAlertCetakInvoice(true)
         setProgressVisibility(false)
       } else {
         setProgressVisibility(false)
