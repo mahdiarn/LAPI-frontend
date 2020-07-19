@@ -245,6 +245,9 @@ class DetailProyek extends React.Component {
         tanggalSelesaiAmandemenInput: response.payload.data.proyek.tanggal_selesai_amandemen,
 
       })
+      if(response.payload.data.proyek.status === Constants.PELUANG_STATUS_HOLD) {
+        history.push(`/peluang/${id}`)
+      }
     } catch (error) {
       history.push('/')
     }
