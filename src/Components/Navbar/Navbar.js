@@ -104,7 +104,7 @@ function Navbar({email, role, title}){
           <Grid item md={3}>
             <img src={logo} alt="lapi-logo" style={logoStyle}/>
           </Grid>
-          <Grid item md={6}>
+          <Grid item md={6} xs={12}>
             <Typography variant="h5">
               { title || 'Menu Utama'}
             </Typography>
