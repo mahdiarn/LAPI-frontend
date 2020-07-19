@@ -998,7 +998,7 @@ class DetailProyek extends React.Component {
                       <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 0'}} onClick={() => {
                         this.handleTogglePrefinancingDetailWindow()
                       }}>
-                        Lihat
+                        Ubah
                       </MUIButton>
                     </Grid>
                 </Grid>
