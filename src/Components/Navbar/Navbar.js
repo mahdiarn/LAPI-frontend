@@ -22,7 +22,7 @@ import APIBuilder from '../../Shared/APIBuilder'
 import Constants from '../../Shared/Constants'
 
 const style = {
-  padding:20,
+  padding:5,
   borderColor: 'black',
   backgroundColor: "#F5F5F5",
   color: "#117C9B"

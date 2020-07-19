@@ -228,7 +228,7 @@ class DaftarPembayaranSPPU extends React.Component {
           refreshData={() => {this.refreshData()}}
         />
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Pembayaran SPPU'}/>
-        <Grid item container justify="center" alignItems="center" style={{ marginTop: '4em', padding: '0 4em'}}>
+        <Grid item container justify="center" alignItems="center" style={{padding: '0 4em'}}>
           <Grid item container justify="center" md={12} alignItems="center" style={{ padding: '15px'}}>
             <Grid item container justify="flex-start" md={6} alignItems="center" style={{ padding: '15px'}}>
               <Grid item container justify="flex-start" md={3} style={{ padding: '15px'}}>

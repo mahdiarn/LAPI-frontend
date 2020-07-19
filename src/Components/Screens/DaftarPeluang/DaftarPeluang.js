@@ -288,7 +288,7 @@ class DaftarPeluang extends React.Component {
       <Grid item container>
         <AddPeluangDialog open={addPeluangWindow} onClose={this.handleToggleAddPeluangWindow}/>
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Daftar Peluang'}/>
-        <Grid item container justify="center" alignItems="center" style={{ marginTop: '4em', padding: '0 4em'}}>
+        <Grid item container justify="center" alignItems="center" style={{ marginTop: '.5em', padding: '0 4em'}}>
           <Grid item container justify="center" md={12} alignItems="center" style={{ padding: '15px'}}>
             <Grid item container justify="flex-start" md={12} alignItems="center" style={{ padding: '15px'}}>
               <Grid item container justify="flex-start" md={3} style={{ padding: '15px'}}>

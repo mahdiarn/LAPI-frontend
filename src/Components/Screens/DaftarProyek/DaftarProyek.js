@@ -207,9 +207,9 @@ class DaftarProyek extends React.Component {
     return (
       <Grid item container>
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Daftar Proyek'}/>
-        <Grid item container justify="center" alignItems="center" style={{ marginTop: '4em', padding: '0 4em'}}>
+        <Grid item container justify="center" alignItems="center" style={{ padding: '0 4em'}}>
           <Grid item container justify="flex-end" md={12} style={{ padding: '15px'}}>
-            <Button style={{padding: '0em 1em', height: '2em'}} onClick={this.handleDirectToPengalamanPage}>Daftar Pengalaman</Button>
+            <Button style={{padding: '0em 1em', height: '3em'}} onClick={this.handleDirectToPengalamanPage}>Daftar Pengalaman</Button>
           </Grid>
           <Grid item container justify="center" md={12} alignItems="center" style={{ padding: '15px'}}>
             <Grid item container justify="flex-start" md={12} alignItems="center" style={{ padding: '15px'}}>

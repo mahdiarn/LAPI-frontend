@@ -207,7 +207,7 @@ class DaftarTim extends React.Component {
           myroute={this.props.location.pathname}
         />
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Daftar Tim'}/>
-        <Grid item container justify="center" alignItems="center" style={{ marginTop: '4em', padding: '0 4em'}}>
+        <Grid item container justify="center" alignItems="center" style={{padding: '0 4em'}}>
           <Grid item container justify="center" md={12} alignItems="center" style={{ padding: '15px'}}>
             <Grid item container justify="flex-start" md={12} alignItems="center" style={{ padding: '15px'}}>
               <Grid item container justify="flex-start" md={3} style={{ padding: '15px'}}>
