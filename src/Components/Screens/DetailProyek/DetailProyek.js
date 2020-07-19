@@ -84,7 +84,9 @@ class DetailProyek extends React.Component {
       lingkupProyek: '',
       kompetitorProyek: '',
       terminPage: 0,
+      pembayaranPage: 0,
       rowsPerTerminPage: 5,
+      rowsPerPembayaranPage: 5,
       nomorKontrakInput: '',
       tanggalKontrakInput: '',
       amandemenKontrakInput: '',
@@ -119,6 +121,8 @@ class DetailProyek extends React.Component {
     this.handleToggleSPPUDetailWindow = this.handleToggleSPPUDetailWindow.bind(this)
     this.handleChangeTerminPage = this.handleChangeTerminPage.bind(this)
     this.handleChangeRowsPerTerminPage = this.handleChangeRowsPerTerminPage.bind(this)
+    this.handleChangePembayaranPage = this.handleChangePembayaranPage.bind(this)
+    this.handleChangeRowsPerPembayaranPage = this.handleChangeRowsPerPembayaranPage.bind(this)
     this.handleToggleCetakSP3 = this.handleToggleCetakSP3.bind(this)
     this.generateSP3SLF = this.generateSP3SLF.bind(this)
     this.generateSP3 = this.generateSP3.bind(this)
@@ -483,6 +487,19 @@ class DetailProyek extends React.Component {
     })
   }
 
+  handleChangePembayaranPage = (event, newPembayaranPage) => {
+    this.setState({
+      pembayaranPage: newPembayaranPage
+    })
+  }
+
+  handleChangeRowsPerPembayaranPage = (event) => {
+    this.setState({
+      pembayaranPage: 0,
+      rowsPerPembayaranPage: +event.target.value
+    })
+  }
+
   columnValue = (column, value) => {
     if (column.id === 'status') {
       switch (value) {
@@ -637,7 +654,9 @@ class DetailProyek extends React.Component {
     const {
       termin,
       terminPage,
-      rowsPerTerminPage
+      rowsPerTerminPage,
+      pembayaranPage,
+      rowsPerPembayaranPage
     } = this.state
 
     const  {
@@ -1157,7 +1176,7 @@ class DetailProyek extends React.Component {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {pembayaranList.slice(terminPage * rowsPerTerminPage, terminPage * rowsPerTerminPage + rowsPerTerminPage).map((row, index) => {
+                      {pembayaranList.slice(terminPage * rowsPerPembayaranPage, terminPage * rowsPerPembayaranPage + rowsPerPembayaranPage).map((row, index) => {
                         return (
                           <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                             {pembayaranColumns.map(column => {
@@ -1242,11 +1261,11 @@ class DetailProyek extends React.Component {
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, 100]}
                   component="div"
-                  count={termin.length}
-                  rowsPerPage={rowsPerTerminPage}
-                  page={terminPage}
-                  onChangePage={this.handleChangeTerminPage}
-                  onChangeRowsPerPage={this.handleChangeRowsPerTerminPage}
+                  count={pembayaranList.length}
+                  rowsPerPage={rowsPerPembayaranPage}
+                  page={pembayaranPage}
+                  onChangePage={this.handleChangePembayaranPage}
+                  onChangeRowsPerPage={this.handleChangeRowsPerPembayaranPage}
                 />
                 <Grid container justify="flex-end" alignItems="center">
                   &nbsp;
