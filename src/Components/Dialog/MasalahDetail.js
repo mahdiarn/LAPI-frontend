@@ -26,7 +26,7 @@ function MasalahDetail(props) {
   } = props
 
   const refreshMasalah = async () => {
-
+    setMessage('')
     const masalahResponse = await APIBuilder(`termin-proyek/${terminId}/masalah`)
     if (masalahResponse){
       if(masalahResponse.code === 200) {
