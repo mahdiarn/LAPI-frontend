@@ -32,9 +32,15 @@ function PrefinancingDetail(props) {
   } = props
 
   useEffect(() => {
+    let tanggalPemberian = tanggalPemberianPrefinancing ? new Date(tanggalPemberianPrefinancing) : null
     setNilaiPrefinancingInput(nilaiPrefinancing || 0)
     setNilaiTerbayarkanInput(nilaiTerbayarkanPrefinancing || 0)
-    setTanggalPemberianInput(tanggalPemberianPrefinancing || '')
+    if (tanggalPemberian) {
+      let formattedDate = `${tanggalPemberian.getFullYear()}-${tanggalPemberian.getMonth()+1 < 10 ? '0' : ''}${tanggalPemberian.getMonth()+1}-${tanggalPemberian.getDate()}`
+      setTanggalPemberianInput(formattedDate)
+    } else {
+      setTanggalPemberianInput('')
+    }
     setKeteranganInput(keteranganPrefinancing || '')
   }, [
     nilaiPrefinancing,
@@ -101,7 +107,9 @@ function PrefinancingDetail(props) {
               InputLabelProps={{
                 shrink: true,
               }}
-              onChange={(e) => setTanggalPemberianInput(e.target.value)}
+              onChange={(e) => {
+                setTanggalPemberianInput(e.target.value)
+              }}
               fullWidth
             />
           </Grid>

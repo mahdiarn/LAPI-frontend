@@ -228,7 +228,7 @@ class DaftarPembayaranSPPU extends React.Component {
           refreshData={() => {this.refreshData()}}
         />
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Pembayaran SPPU'}/>
-        <Grid item container justify="center" alignItems="center" style={{ marginTop: '4em', padding: '0 4em'}}>
+        <Grid item container justify="center" alignItems="center" style={{padding: (window.innerWidth <= 600) ? '0' : '0 4em'}}>
           <Grid item container justify="center" md={12} alignItems="center" style={{ padding: '15px'}}>
             <Grid item container justify="flex-start" md={6} alignItems="center" style={{ padding: '15px'}}>
               <Grid item container justify="flex-start" md={3} style={{ padding: '15px'}}>
@@ -258,7 +258,7 @@ class DaftarPembayaranSPPU extends React.Component {
               <Button style={{padding: '10px 20px'}} onClick={this.handleToggleAddPembayaranSPPUWindow}><AddIcon></AddIcon><Typography variant="caption">Tambah SPPU</Typography></Button>
             </Grid>
           </Grid>
-          <Grid item container justify="flex-start" alignItems="center" style={{ padding: '0 4em'}}>
+          <Grid item container justify="flex-start" alignItems="center" style={{ padding: (window.innerWidth <= 600) ? '0' : '0 4em'}}>
             <Grid item container justify="flex-start" alignItems="center" md={2} style={{ padding: '15px'}}>
               <Checkbox
                 checked={isDraftChecked}

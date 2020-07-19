@@ -84,7 +84,9 @@ class DetailProyek extends React.Component {
       lingkupProyek: '',
       kompetitorProyek: '',
       terminPage: 0,
+      pembayaranPage: 0,
       rowsPerTerminPage: 5,
+      rowsPerPembayaranPage: 5,
       nomorKontrakInput: '',
       tanggalKontrakInput: '',
       amandemenKontrakInput: '',
@@ -119,6 +121,8 @@ class DetailProyek extends React.Component {
     this.handleToggleSPPUDetailWindow = this.handleToggleSPPUDetailWindow.bind(this)
     this.handleChangeTerminPage = this.handleChangeTerminPage.bind(this)
     this.handleChangeRowsPerTerminPage = this.handleChangeRowsPerTerminPage.bind(this)
+    this.handleChangePembayaranPage = this.handleChangePembayaranPage.bind(this)
+    this.handleChangeRowsPerPembayaranPage = this.handleChangeRowsPerPembayaranPage.bind(this)
     this.handleToggleCetakSP3 = this.handleToggleCetakSP3.bind(this)
     this.generateSP3SLF = this.generateSP3SLF.bind(this)
     this.generateSP3 = this.generateSP3.bind(this)
@@ -231,7 +235,7 @@ class DetailProyek extends React.Component {
         lingkupProyek: response.payload.data.proyek.lingkup_proyek,
         kompetitorProyek: response.payload.data.proyek.kompetitor_proyek,
         tenagaAhli: response.payload.data.tenaga_ahli,
-        termin: response.payload.data.termin,
+        termin: terminResponse.payload.data,
         pembayaranList: pembayaranListTemp,
         terminList: terminResponse.payload.data,
         nomorSP3Input: latestSP3SLFNumberResponse.payload.data + 1,
@@ -245,6 +249,9 @@ class DetailProyek extends React.Component {
         tanggalSelesaiAmandemenInput: response.payload.data.proyek.tanggal_selesai_amandemen,
 
       })
+      if(response.payload.data.proyek.status === Constants.PELUANG_STATUS_HOLD) {
+        history.push(`/peluang/${id}`)
+      }
     } catch (error) {
       history.push('/')
     }
@@ -480,6 +487,19 @@ class DetailProyek extends React.Component {
     })
   }
 
+  handleChangePembayaranPage = (event, newPembayaranPage) => {
+    this.setState({
+      pembayaranPage: newPembayaranPage
+    })
+  }
+
+  handleChangeRowsPerPembayaranPage = (event) => {
+    this.setState({
+      pembayaranPage: 0,
+      rowsPerPembayaranPage: +event.target.value
+    })
+  }
+
   columnValue = (column, value) => {
     if (column.id === 'status') {
       switch (value) {
@@ -634,7 +654,9 @@ class DetailProyek extends React.Component {
     const {
       termin,
       terminPage,
-      rowsPerTerminPage
+      rowsPerTerminPage,
+      pembayaranPage,
+      rowsPerPembayaranPage
     } = this.state
 
     const  {
@@ -823,7 +845,7 @@ class DetailProyek extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 4) ? (<Button onClick={this.toggleDetailEditMode}>{editDetailMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 4) ? (<Button onClick={this.toggleDetailEditMode} style={{padding: '0 0'}}>{editDetailMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -893,7 +915,7 @@ class DetailProyek extends React.Component {
                       </Typography></Grid>
                     </Grid>
                     <Grid container justify="flex-end" alignItems="center">
-                      <Grid item>{(Authorization.getRole() === 5 && proyek && proyek.status === 4) ? (<Button onClick={this.toggleKontrakSP3EditMode}>{editKontrakSP3Mode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                      <Grid item>{(Authorization.getRole() === 5 && proyek && proyek.status === 4) ? (<Button onClick={this.toggleKontrakSP3EditMode} style={{padding: '0 0'}}>{editKontrakSP3Mode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                     </Grid>
                     <br />
                   </div>
@@ -992,10 +1014,10 @@ class DetailProyek extends React.Component {
                     <Grid item container md={6} alignItems="center">
                       <Typography align="left">: {(proyek) ? (proyek.tanggal_pemberian_prefinancing) ? 'Ada' : 'Tidak Ada' : 'Tidak Ada'}</Typography>
                       &nbsp;&nbsp;
-                      <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px'}} onClick={() => {
+                      <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 0'}} onClick={() => {
                         this.handleTogglePrefinancingDetailWindow()
                       }}>
-                        Lihat
+                        Ubah
                       </MUIButton>
                     </Grid>
                 </Grid>
@@ -1003,11 +1025,11 @@ class DetailProyek extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.togglePemberiKerjaEditMode}>{editPemberiKerjaMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.togglePemberiKerjaEditMode} style={{padding: '0 0'}}>{editPemberiKerjaMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
-              <Paper style={{width: '100%', padding: '1em 1.5em'}}>
+              <Paper style={{width: '100%', padding: '1em 1.5em', boxSizing: 'border-box'}}>
                 <Grid container justify="flex-end" alignItems="center">
                   <Grid item container md={6} justify="flex-end">
                     <Link to={`/proyek/log/${id}`}>Detail</Link>
@@ -1027,7 +1049,7 @@ class DetailProyek extends React.Component {
               </Paper>
             </Grid>  
             <Grid item container justify="center" alignItems="center" md={4}>
-              <Paper style={{width: '100%', padding: '1em 1.5em'}}>
+              <Paper style={{width: '100%', padding: '1em 1.5em', boxSizing: 'border-box'}}>
                 <Grid container justify="flex-end" alignItems="center">
                   <Grid item container md={6} justify="flex-end">
                     <Link to={`/proyek/termin/${id}`}>Detail</Link>
@@ -1035,87 +1057,89 @@ class DetailProyek extends React.Component {
                 </Grid>
                 <Typography variant="h5">Termin Proyek</Typography>
                 <Divider />
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow>
-                      {terminColumns.map(column => (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          style={{ minWidth: column.minWidth }}
-                        >
-                          {column.label}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {termin.slice(terminPage * rowsPerTerminPage, terminPage * rowsPerTerminPage + rowsPerTerminPage).map((row, index) => {
-                      return (
-                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                          {terminColumns.map(column => {
-                            const value = row[column.id]
-                            const penagihanStatus = row['penagihan_status']
-                            if (column.id === "termin-number") {
-                              return (
-                                <TableCell key={column.id+value} align={column.align}>
-                                  { index + 1 }
-                                </TableCell>
-                              )
-                            } else if (column.id === "persentase") {
-                              return (
-                                <TableCell key={column.id+value} align={column.align}>
-                                  { value }&#37;
-                                </TableCell>
-                              )
-                            } else if (column.id === 'termin-menu') {
-                              return (
-                                <TableCell key={column.id+index} align={column.align}>
-                                  <Link to={this.props.location.pathname} onClick={(e) => this.handleRemoveTermin(e,row.id)}>Hapus</Link>
-                                  <br />
-                                  <Link to={this.props.location.pathname} onClick={(e) => this.handleFinishTermin(e,row.id)}>Selesai</Link>
-                                </TableCell>
-                              )
-                            } else if (column.id === 'termin-masalah-action') {
-                              return (
-                                <TableCell key={column.id+index} align={column.align}>
-                                  <Link to={this.props.location.pathname} onClick={(e) => this.selectMasalahDetail(row.id)}>Detail</Link>
-                                </TableCell>
-                              )
-                            } else if (column.id === 'masalah_count') {
-                              return (
-                                <TableCell key={column.id+index} align={column.align}>
-                                  {value || 0}
-                                </TableCell>
-                              )
-                            } else if (column.id === 'termin-penagihan-action') {
-                              return (
-                                <TableCell key={column.id+index} align={column.align}>
-                                  {(penagihanStatus === Constants.TERMIN_STATUS_PENAGIHAN_DITERBITKAN) ? (<Link>Lihat</Link>) : ''}
-                                  {(penagihanStatus === Constants.TERMIN_STATUS_PENAGIHAN_PENDING) ? '-' : ''}
-                                  {(penagihanStatus === Constants.TERMIN_STATUS_PENAGIHAN_BELUM_ADA) ? (<Link to={this.props.location.pathname} onClick={(e) => this.handleTagihTermin(e,row.id)}>Ajukan</Link>) : ''}
-                                </TableCell>
-                              )
-                            } else if (['target_selesai', 'tanggal_selesai', 'tanggal_penagihan'].includes(column.id)) {
-                              let date = new Date(value)
-                              return (
-                                <TableCell key={column.id+value} align={column.align}>
-                                  {(value) ? `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}` : '-'}
-                                </TableCell>
-                              )
-                            } else {
-                              return (
-                                <TableCell key={column.id+value} align={column.align}>
-                                  { this.columnValue(column,value) }
-                                </TableCell>
-                              )
-                            }
-                          })}
-                        </TableRow>
-                      )
-                    })}
-                  </TableBody>
-                </Table>
+                <Paper style={{overflowX: 'auto'}}>
+                  <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                      <TableRow>
+                        {terminColumns.map(column => (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            style={{ minWidth: column.minWidth }}
+                          >
+                            {column.label}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {termin.slice(terminPage * rowsPerTerminPage, terminPage * rowsPerTerminPage + rowsPerTerminPage).map((row, index) => {
+                        return (
+                          <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                            {terminColumns.map(column => {
+                              const value = row[column.id]
+                              const penagihanStatus = row['penagihan_status']
+                              if (column.id === "termin_ke") {
+                                return (
+                                  <TableCell key={column.id+value} align={column.align}>
+                                    { value }
+                                  </TableCell>
+                                )
+                              } else if (column.id === "persentase") {
+                                return (
+                                  <TableCell key={column.id+value} align={column.align}>
+                                    { value }&#37;
+                                  </TableCell>
+                                )
+                              } else if (column.id === 'termin-menu') {
+                                return (
+                                  <TableCell key={column.id+index} align={column.align}>
+                                    <Link to={this.props.location.pathname} onClick={(e) => this.handleRemoveTermin(e,row.id)}>Hapus</Link>
+                                    <br />
+                                    <Link to={this.props.location.pathname} onClick={(e) => this.handleFinishTermin(e,row.id)}>Selesai</Link>
+                                  </TableCell>
+                                )
+                              } else if (column.id === 'termin-masalah-action') {
+                                return (
+                                  <TableCell key={column.id+index} align={column.align}>
+                                    <Link to={this.props.location.pathname} onClick={(e) => this.selectMasalahDetail(row.id)}>Detail</Link>
+                                  </TableCell>
+                                )
+                              } else if (column.id === 'masalah_count') {
+                                return (
+                                  <TableCell key={column.id+index} align={column.align}>
+                                    {value || 0}
+                                  </TableCell>
+                                )
+                              } else if (column.id === 'termin-penagihan-action') {
+                                return (
+                                  <TableCell key={column.id+index} align={column.align}>
+                                    {(penagihanStatus === Constants.TERMIN_STATUS_PENAGIHAN_DITERBITKAN) ? (<Link>Lihat</Link>) : ''}
+                                    {(penagihanStatus === Constants.TERMIN_STATUS_PENAGIHAN_PENDING) ? '-' : ''}
+                                    {(penagihanStatus === Constants.TERMIN_STATUS_PENAGIHAN_BELUM_ADA) ? (<Link to={this.props.location.pathname} onClick={(e) => this.handleTagihTermin(e,row.id)}>Ajukan</Link>) : ''}
+                                  </TableCell>
+                                )
+                              } else if (['target_selesai', 'tanggal_selesai', 'tanggal_penagihan'].includes(column.id)) {
+                                let date = new Date(value)
+                                return (
+                                  <TableCell key={column.id+value} align={column.align}>
+                                    {(value) ? `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}` : '-'}
+                                  </TableCell>
+                                )
+                              } else {
+                                return (
+                                  <TableCell key={column.id+value} align={column.align}>
+                                    { this.columnValue(column,value) }
+                                  </TableCell>
+                                )
+                              }
+                            })}
+                          </TableRow>
+                        )
+                      })}
+                    </TableBody>
+                  </Table>
+                </Paper>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, 100]}
                   component="div"
@@ -1129,123 +1153,125 @@ class DetailProyek extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.toggleTimEditMode}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 0'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
               <Paper style={{width: '100%', padding: '1em 1.5em'}}>
                 <Typography variant="h5">Pembayaran</Typography>
                 <Divider />
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow>
-                      {pembayaranColumns.map(column => (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          style={{ minWidth: column.minWidth }}
-                        >
-                          {column.label}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {pembayaranList.slice(terminPage * rowsPerTerminPage, terminPage * rowsPerTerminPage + rowsPerTerminPage).map((row, index) => {
-                      return (
-                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                          {pembayaranColumns.map(column => {
-                            const value = row[column.id]
-                            // eslint-disable-next-line no-unused-vars
-                            const penagihanStatus = row['penagihan_status']
-                            if (column.id === "no") {
-                              return (
-                                <TableCell key={column.id+value} align={column.align}>
-                                  { index + 1 }
-                                </TableCell>
-                              )
-                            } else if (column.id === "type") {
-                              let code = 'INV'
-                              if (value === 'sppu') {
-                                code = 'SPPU'
+                <Paper style={{overflowX: 'auto'}}>
+                  <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                      <TableRow>
+                        {pembayaranColumns.map(column => (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            style={{ minWidth: column.minWidth }}
+                          >
+                            {column.label}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {pembayaranList.slice(terminPage * rowsPerPembayaranPage, terminPage * rowsPerPembayaranPage + rowsPerPembayaranPage).map((row, index) => {
+                        return (
+                          <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                            {pembayaranColumns.map(column => {
+                              const value = row[column.id]
+                              // eslint-disable-next-line no-unused-vars
+                              const penagihanStatus = row['penagihan_status']
+                              if (column.id === "no") {
+                                return (
+                                  <TableCell key={column.id+value} align={column.align}>
+                                    { index + 1 }
+                                  </TableCell>
+                                )
+                              } else if (column.id === "type") {
+                                let code = 'INV'
+                                if (value === 'sppu') {
+                                  code = 'SPPU'
+                                }
+                                return (
+                                  <TableCell key={column.id+value} align={column.align}>
+                                    {code}
+                                  </TableCell>
+                                )
+                              }  else if (column.id === "tanggal") {
+                                return (
+                                  <TableCell key={column.id+value} align={column.align}>
+                                    {moment(value).format('YYYY-MM-DD')}
+                                  </TableCell>
+                                )
+                              } else if (column.id === 'status') {
+                                let status = ''
+                                if ((row['type'] === 'invoice') && (value === Constants.TERMIN_STATUS_PENAGIHAN_DITERBITKAN)) {
+                                  status = 'Ditagih'
+                                }
+                                if ((row['type'] === 'invoice') && (value === Constants.TERMIN_STATUS_PENAGIHAN_DIBAYARKAN)) {
+                                  status = 'Lunas'
+                                }
+                                if ((row['type'] === 'sppu') && (value === Constants.SPPU_STATUS_DRAFT)) {
+                                  status = 'Ditagih'
+                                }
+                                if ((row['type'] === 'sppu') && (value === Constants.SPPU_STATUS_TERBAYAR)) {
+                                  status = 'Lunas'
+                                }
+                                return (
+                                  <TableCell key={column.id+index} align={column.align}>
+                                    {status}
+                                  </TableCell>
+                                )
+                              } else if (column.id === 'action') {
+                                const onInvoice = (e) => {
+                                  this.setState({selectedInvoice: row.value})
+                                  this.handleToggleInvoiceDetailWindow(e);
+                                }
+                                const onSPPU = (e) => {
+                                  this.setState({selectedSPPU: row.value})
+                                  this.handleToggleSPPUDetailWindow(e);
+                                }
+                                return (
+                                  <TableCell key={column.id+index} align={column.align}>
+                                    <Link to={this.props.location.pathname} onClick={(e) => {
+                                      if (row['type'] === 'invoice') {
+                                        onInvoice(e)
+                                      } else {
+                                        onSPPU(e)
+                                      }
+                                    }}>Detail</Link>
+                                  </TableCell>
+                                )
+                              } else {
+                                return (
+                                  <TableCell key={column.id+value} align={column.align}>
+                                    -
+                                  </TableCell>
+                                )
                               }
-                              return (
-                                <TableCell key={column.id+value} align={column.align}>
-                                  {code}
-                                </TableCell>
-                              )
-                            }  else if (column.id === "tanggal") {
-                              return (
-                                <TableCell key={column.id+value} align={column.align}>
-                                  {moment(value).format('YYYY-MM-DD')}
-                                </TableCell>
-                              )
-                            } else if (column.id === 'status') {
-                              let status = ''
-                              if ((row['type'] === 'invoice') && (value === Constants.TERMIN_STATUS_PENAGIHAN_DITERBITKAN)) {
-                                status = 'Ditagih'
-                              }
-                              if ((row['type'] === 'invoice') && (value === Constants.TERMIN_STATUS_PENAGIHAN_DIBAYARKAN)) {
-                                status = 'Lunas'
-                              }
-                              if ((row['type'] === 'sppu') && (value === Constants.SPPU_STATUS_DRAFT)) {
-                                status = 'Ditagih'
-                              }
-                              if ((row['type'] === 'sppu') && (value === Constants.SPPU_STATUS_TERBAYAR)) {
-                                status = 'Lunas'
-                              }
-                              return (
-                                <TableCell key={column.id+index} align={column.align}>
-                                  {status}
-                                </TableCell>
-                              )
-                            } else if (column.id === 'action') {
-                              const onInvoice = (e) => {
-                                this.setState({selectedInvoice: row.value})
-                                this.handleToggleInvoiceDetailWindow(e);
-                              }
-                              const onSPPU = (e) => {
-                                this.setState({selectedSPPU: row.value})
-                                this.handleToggleSPPUDetailWindow(e);
-                              }
-                              return (
-                                <TableCell key={column.id+index} align={column.align}>
-                                  <Link to={this.props.location.pathname} onClick={(e) => {
-                                    if (row['type'] === 'invoice') {
-                                      onInvoice(e)
-                                    } else {
-                                      onSPPU(e)
-                                    }
-                                  }}>Detail</Link>
-                                </TableCell>
-                              )
-                            } else {
-                              return (
-                                <TableCell key={column.id+value} align={column.align}>
-                                  -
-                                </TableCell>
-                              )
-                            }
-                          })}
-                        </TableRow>
-                      )
-                    })}
-                  </TableBody>
-                </Table>
+                            })}
+                          </TableRow>
+                        )
+                      })}
+                    </TableBody>
+                  </Table>
+                </Paper>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, 100]}
                   component="div"
-                  count={termin.length}
-                  rowsPerPage={rowsPerTerminPage}
-                  page={terminPage}
-                  onChangePage={this.handleChangeTerminPage}
-                  onChangeRowsPerPage={this.handleChangeRowsPerTerminPage}
+                  count={pembayaranList.length}
+                  rowsPerPage={rowsPerPembayaranPage}
+                  page={pembayaranPage}
+                  onChangePage={this.handleChangePembayaranPage}
+                  onChangeRowsPerPage={this.handleChangeRowsPerPembayaranPage}
                 />
                 <Grid container justify="flex-end" alignItems="center">
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.toggleTimEditMode}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 0'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
             </Grid>  

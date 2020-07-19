@@ -81,7 +81,7 @@ class TerminProyek extends React.Component {
 
   handleChangeTerminPage = (event, newTerminPage) => {
     this.setState({
-      logPage: newTerminPage
+      terminPage: newTerminPage
     })
   }
 
@@ -278,7 +278,7 @@ class TerminProyek extends React.Component {
         </Grid>
         <Grid item container spacing={2} justify="center" alignItems="flex-start" style={{ marginTop: '4em', padding: '0 1em'}}>
           
-          <Paper>
+          <Paper style={{overflowX: 'auto'}}>
             <Grid container justify="center" alignItems="center">
               <Grid item md={12}><Typography>Informasi Termin</Typography></Grid>
               <Grid item md={12}>&nbsp;</Grid>

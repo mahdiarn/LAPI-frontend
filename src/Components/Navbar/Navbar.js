@@ -22,7 +22,7 @@ import APIBuilder from '../../Shared/APIBuilder'
 import Constants from '../../Shared/Constants'
 
 const style = {
-  padding:20,
+  padding:5,
   borderColor: 'black',
   backgroundColor: "#F5F5F5",
   color: "#117C9B"
@@ -62,12 +62,23 @@ function Navbar({email, role, title}){
     getNotificationList()
   }, []) 
   
-  const route = (route) => route.map((item) => {
-    return (
-      <Link onClick={() => {history.push(item.url)}} key={item.name+'-key'}>
-        {`\u00A0${item.name}\u00A0`}
-      </Link>
-    )
+  const route = (route) => route.map((item, key) => {
+    if (
+      key === route.length-1
+    ) {
+      return (
+        <Link onClick={() => {history.push(item.url)}} key={item.name+'-key'}>
+          {`\u00A0${item.name}\u00A0`}
+        </Link>
+      )
+    } else {
+      return (
+        <Link onClick={() => {history.push(item.url)}} key={item.name+'-key'}>
+          {`\u00A0${item.name}\u00A0`}|
+        </Link>
+      )  
+    }
+    
   })
 
   function routesFilter(role) {
@@ -104,7 +115,7 @@ function Navbar({email, role, title}){
           <Grid item md={3}>
             <img src={logo} alt="lapi-logo" style={logoStyle}/>
           </Grid>
-          <Grid item md={6}>
+          <Grid item md={6} xs={12}>
             <Typography variant="h5">
               { title || 'Menu Utama'}
             </Typography>

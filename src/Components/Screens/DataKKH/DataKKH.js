@@ -91,7 +91,7 @@ class DataKKH extends React.Component {
         <AddKKHDialog open={addKKHWindow} onClose={this.handleToggleAddKKHWindow}/>
         <EditKKHDialog open={editKKHWindow} onClose={this.handleToggleEditKKHWindow} selectedKKH={selectedKKH}/>
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Data KKH'}/>
-        <Grid item container justify="center" alignItems="center" style={{ marginTop: '4em', padding: '0 4em'}}>
+        <Grid item container justify="center" alignItems="center" style={{padding: (window.innerWidth <= 600) ? '0' : '0 4em'}}>
           <Grid item container justify="center" md={12} alignItems="center" style={{ padding: '15px'}}>
             <Grid item container justify="flex-start" md={12} alignItems="center" style={{ padding: '15px'}}>
               <Button style={{padding: '0em 1em', height: '2em'}} onClick={this.handleToggleAddKKHWindow}><AddIcon></AddIcon> Tambah KKH</Button>
