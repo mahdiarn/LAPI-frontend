@@ -231,7 +231,7 @@ class DetailProyek extends React.Component {
         lingkupProyek: response.payload.data.proyek.lingkup_proyek,
         kompetitorProyek: response.payload.data.proyek.kompetitor_proyek,
         tenagaAhli: response.payload.data.tenaga_ahli,
-        termin: response.payload.data.termin,
+        termin: terminResponse.payload.data,
         pembayaranList: pembayaranListTemp,
         terminList: terminResponse.payload.data,
         nomorSP3Input: latestSP3SLFNumberResponse.payload.data + 1,
@@ -1060,10 +1060,10 @@ class DetailProyek extends React.Component {
                             {terminColumns.map(column => {
                               const value = row[column.id]
                               const penagihanStatus = row['penagihan_status']
-                              if (column.id === "termin-number") {
+                              if (column.id === "termin_ke") {
                                 return (
                                   <TableCell key={column.id+value} align={column.align}>
-                                    { index + 1 }
+                                    { value }
                                   </TableCell>
                                 )
                               } else if (column.id === "persentase") {
