@@ -207,7 +207,7 @@ class DaftarProyek extends React.Component {
     return (
       <Grid item container>
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Daftar Proyek'}/>
-        <Grid item container justify="center" alignItems="center" style={{ padding: '0 4em'}}>
+        <Grid item container justify="center" alignItems="center" style={{ padding: (window.innerWidth <= 600) ? '0' : '0 4em'}}>
           <Grid item container justify="flex-end" md={12} style={{ padding: '15px'}}>
             <Button style={{padding: '0em 1em', height: '3em'}} onClick={this.handleDirectToPengalamanPage}>Daftar Pengalaman</Button>
           </Grid>
@@ -237,7 +237,7 @@ class DaftarProyek extends React.Component {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item container justify="flex-start" alignItems="center" style={{ padding: '0 4em'}}>
+          <Grid item container justify="flex-start" alignItems="center" style={{ padding: (window.innerWidth <= 600) ? '0' : '0 4em'}}>
             <Grid item container justify="flex-start" alignItems="center" md={2} style={{ padding: '15px'}}>
               <Checkbox
                 checked={isPengadaan}

@@ -191,7 +191,7 @@ class DaftarPenagihanInvoice extends React.Component {
           myroute={this.props.location.pathname}
         />
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Pembayaran Invoice'}/>
-        <Grid item container justify="center" alignItems="center" style={{padding: '0 4em'}}>
+        <Grid item container justify="center" alignItems="center" style={{padding: (window.innerWidth <= 600) ? '0' : '0 4em'}}>
           <Grid item container justify="center" md={12} alignItems="center" style={{ padding: '15px'}}>
             <Grid item container justify="flex-start" md={6} alignItems="center" style={{ padding: '15px'}}>
               <Grid item container justify="flex-start" md={3} style={{ padding: '15px'}}>

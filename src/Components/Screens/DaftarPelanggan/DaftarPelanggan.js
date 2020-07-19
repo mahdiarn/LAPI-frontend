@@ -234,7 +234,7 @@ class DaftarPelanggan extends React.Component {
           pemberiKerjaId={selectedPelangganId}
         />
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Daftar Pelanggan'}/>
-        <Grid item container justify="center" alignItems="center" style={{padding: '0 4em'}}>
+        <Grid item container justify="center" alignItems="center" style={{padding: (window.innerWidth <= 600) ? '0' : '0 4em'}}>
           <Grid item container justify="center" md={12} alignItems="center" style={{ padding: '15px'}}>
             <Grid item container justify="flex-start" md={12} alignItems="center" style={{ padding: '15px'}}>
               <Grid item container justify="flex-start" md={3} style={{ padding: '15px'}}>
