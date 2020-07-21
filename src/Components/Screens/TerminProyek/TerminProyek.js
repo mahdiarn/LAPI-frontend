@@ -212,6 +212,8 @@ class TerminProyek extends React.Component {
           return 'Diterbitkan'
         case Constants.TERMIN_STATUS_PENAGIHAN_PENDING:
           return 'Pending'
+        case Constants.TERMIN_STATUS_PENAGIHAN_DIBAYARKAN:
+          return 'Dibayarkan'  
         case Constants.TERMIN_STATUS_PENAGIHAN_BELUM_ADA:
         default:
           return 'Belum Ada'
