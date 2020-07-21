@@ -31,7 +31,7 @@ class DataKKH extends React.Component {
       addPeluangWindow: false,
       addKKHWindow: false,
       editKKHWindow: false,
-      selectedKKH: 0,
+      selectedKKH: {},
     }
 
     this.handleChangePage = this.handleChangePage.bind(this)
@@ -128,7 +128,14 @@ class DataKKH extends React.Component {
                           return (
                             <TableCell key={column.id+value} align={column.align}>
                               <Link to={'#'} onClick={() => {
-                                this.setState({selectedKKH: row.id})
+                                this.setState({
+                                  selectedKKH: {
+                                    id: row.id,
+                                    start_time: row.start_time,
+                                    end_time: row.end_time,
+                                    kegiatan: row.message
+                                  }
+                                })
                                 this.handleToggleEditKKHWindow()
                               }}>Ubah</Link>
                             </TableCell>

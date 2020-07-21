@@ -20,6 +20,7 @@ function EditKKH(props) {
   const [nip, setNip] = useState('')
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
+  const { onClose, selectedValue, open, selectedKKH } = props
 
   const handleStartDateChange = date => {
     setStartDate(date);
@@ -40,10 +41,29 @@ function EditKKH(props) {
       }
     }
 
-    getNIPList()
-  }, []) 
+    let start_date = new Date()
+    if (selectedKKH.start_time) {
+      start_date.setHours(selectedKKH.start_time.split(':')[0])
+      start_date.setMinutes(selectedKKH.start_time.split(':')[1])
+      start_date.setSeconds(0)
+    }
 
-  const { onClose, selectedValue, open, selectedKKH } = props
+    let end_date = new Date()
+    if (selectedKKH.end_time) {
+      end_date.setHours(selectedKKH.end_time.split(':')[0])
+      end_date.setMinutes(selectedKKH.end_time.split(':')[1])
+      end_date.setSeconds(0)
+    }
+
+    if (selectedKKH.kegiatan) {
+      setKegiatan(selectedKKH.kegiatan)
+    }
+
+    setStartDate(start_date)
+    setEndDate(end_date)
+
+    getNIPList()
+  }, [selectedKKH]) 
 
   const handleClose = () => {
     onClose(selectedValue)
@@ -59,11 +79,10 @@ function EditKKH(props) {
       endDate
     }
 
-    const response = await APIBuilder(`log/kkh/${selectedKKH}`, payload, 'POST')
+    const response = await APIBuilder(`log/kkh/${selectedKKH.id}`, payload, 'POST')
     if (response.code !== 200){
       alert('Perubahan KKH Gagal!')
       setProgressVisibility(false)
-      return handleClose()
     }
 
     if (response.code === 200) {
@@ -104,7 +123,9 @@ function EditKKH(props) {
               renderInput={params => (
                 <TextField {...params} label="NIP" variant="outlined" fullWidth />
               )}
-              onChange={(event, values) => setNip(values)}
+              onChange={(event, values) => {
+                return setNip(values)
+              }}
             />
           </Grid>
           <Grid item md={2}>&nbsp;</Grid>
@@ -119,7 +140,7 @@ function EditKKH(props) {
         </Grid>
         <Grid item container>&nbsp;</Grid>
         <Grid item container direction="row-reverse">
-          <Grid item md={12} container justify="center"><Input type="submit" disableUnderline value="Tambah KKH" /></Grid>
+          <Grid item md={12} container justify="center"><Input type="submit" disableUnderline value="Ubah KKH" /></Grid>
         </Grid>
       </form>
     </Dialog>
@@ -129,7 +150,7 @@ function EditKKH(props) {
 EditKKH.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  selectedKKH: PropTypes.number.isRequired
+  selectedKKH: PropTypes.object.isRequired
 }
 
 export default EditKKH
