@@ -35,6 +35,14 @@ export default class Authorization {
     }
   }
 
+  static getFullName() {
+    if (jwt.decode(Authorization.getToken())) {
+      return (jwt.decode(Authorization.getToken()).nama_lengkap)
+    } else {
+      Authorization.logout()
+    }
+  }
+
   static getId() {
     if (jwt.decode(Authorization.getToken())) {
       return (jwt.decode(Authorization.getToken()).id)

@@ -108,7 +108,7 @@ export const informasiProyekFileColumns = [
 
 export const daftarKKHColumn = [
   { id: 'created_time', label: 'Tanggal', minWidth: 170 },
-  { id: 'message', label: 'Pemberi Kerja', minWidth: 170 },
+  { id: 'message', label: 'Kegiatan', minWidth: 170 },
   { id: 'start_time', label: 'Jam Mulai', minWidth: 170 },
   { id: 'end_time', label: 'Jam Selesai', minWidth: 170 },
   { id: 'menu', label: 'Menu', minWidth: 170 }

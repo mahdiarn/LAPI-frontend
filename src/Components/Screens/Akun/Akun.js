@@ -16,6 +16,7 @@ class Akun extends React.Component {
     super(props)
 
     this.state = {
+      newName: '',
       password: '',
       newPassword: '',
       newPasswordConfirmation: ''
@@ -23,6 +24,7 @@ class Akun extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this)
 
+    this.handleChangeNewName = this.handleChangeNewName.bind(this)
     this.handleChangePassword = this.handleChangePassword.bind(this)
     this.handleChangeNewPassword = this.handleChangeNewPassword.bind(this)
     this.handleChangeNewPasswordConfirmation = this.handleChangeNewPasswordConfirmation.bind(this)
@@ -35,27 +37,31 @@ class Akun extends React.Component {
     }
     validateToken()
     const response = await APIBuilder('roles')
-    this.setState({roleList: response.payload.data})
+    this.setState({roleList: response.payload.data, newName: Authorization.getFullName()})
   }
 
   handleSubmit = async (event) => {
-    const {password, newPassword, newPasswordConfirmation} = this.state
+    const {password, newPassword, newPasswordConfirmation, newName} = this.state
     event.preventDefault()
     if ((newPassword) && (newPassword !== newPasswordConfirmation)) alert ('Password dan Password Confirmation Tidak Sesuai!')
     let payload = {
-      password, new_password: newPassword, new_password_confirmation: newPasswordConfirmation
+      password, new_password: newPassword, new_password_confirmation: newPasswordConfirmation, nama_lengkap: newName
     }
     const response = await APIBuilder('change-password', payload, 'POST')
     if (response.code !== 200){
+      console.log(response)
       alert(response.payload.msg)
       return
     }
 
-    alert('Berhasil Membuat User Baru!')
-    return history.push('/profile')
+    alert('Berhasil Mengganti Detail User, Silahkan login kembali!')
+    return Authorization.logout()
 
   }
   
+  handleChangeNewName = (event) => {
+    this.setState({newName: event.target.value})
+  }
   handleChangePassword = (event) => {
     this.setState({password: event.target.value})
   }
@@ -67,7 +73,7 @@ class Akun extends React.Component {
   }
   
   render() {
-    const {password, newPassword, newPasswordConfirmation} = this.state
+    const {password, newPassword, newPasswordConfirmation, newName} = this.state
 
     return (
       <Grid item container>
@@ -75,6 +81,10 @@ class Akun extends React.Component {
         <Grid item container justify="center" alignItems="center" style={{ marginTop: '4em', padding: '0 24em'}}>
           <Grid item container md={12} style={{padding: '30px 20px'}}>
             <form onSubmit={this.handleSubmit} style={{width: '100%'}}>
+              <Grid item container alignItems="center" justify="space-between">
+                <Grid item>Nama Lengkap</Grid>
+                <Grid item md={6}><TextField id="input-full-name" label="Name" variant="outlined" type="text" fullWidth value={newName} onChange={this.handleChangeNewName}/></Grid>
+              </Grid>
               <Grid item container alignItems="center" justify="space-between">
                 <Grid item>Email</Grid>
                 <Grid item md={6}>{Authorization.getEmail()}</Grid>
