@@ -566,7 +566,7 @@ class DetailPeluang extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.toggleDetailEditMode}>{editDetailMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.toggleDetailEditMode} style={{padding: '0 0'}}>{editDetailMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -633,7 +633,7 @@ class DetailPeluang extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.togglePemberiKerjaEditMode}>{editPemberiKerjaMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.togglePemberiKerjaEditMode} style={{padding: '0 0'}}>{editPemberiKerjaMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -691,7 +691,7 @@ class DetailPeluang extends React.Component {
                           <Grid item container md={6} alignItems="center">
                             <Typography align="left">: {(timTerpilih.cv.id) ? 'Ada' : 'Tidak Ada'}</Typography>
                             &nbsp;&nbsp;
-                            {(timTerpilih.cv.id) ? (<MUIButton style={{border: '1px solid black', borderRadius: '15px 15px'}} onClick={() => {
+                            {(timTerpilih.cv.id) ? (<MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 0'}} onClick={() => {
                               window.open(`${baseUrl}/uploads/${timTerpilih.cv.filename}.${timTerpilih.cv.extension}`, '_blank')
                             }}>
                               Lihat
@@ -936,7 +936,7 @@ class DetailPeluang extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.toggleTimEditMode}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 0'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
             </Grid>  
