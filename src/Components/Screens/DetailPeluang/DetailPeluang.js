@@ -685,7 +685,7 @@ class DetailPeluang extends React.Component {
                       <Grid item container md={6}>CV Tim Ahli</Grid>
                         {editTimMode ? (
                           <Grid item container md={6} alignItems="center">
-                            <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px'}} onClick={() => {this.handleToggleUploadWindow(timTerpilih.id)}}>Upload</MUIButton>
+                            <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 0'}} onClick={() => {this.handleToggleUploadWindow(timTerpilih.id)}}>Upload</MUIButton>
                           </Grid>
                         ) : (
                           <Grid item container md={6} alignItems="center">
@@ -779,13 +779,13 @@ class DetailPeluang extends React.Component {
                       <Grid item container md={6}>CV Tim Ahli</Grid>
                         {editTimMode ? (
                           <Grid item container md={6} alignItems="center">
-                            <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px'}} onClick={() => {this.handleToggleUploadWindow(usulanTimSatu.id)}}>Upload</MUIButton>
+                            <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 0'}} onClick={() => {this.handleToggleUploadWindow(usulanTimSatu.id)}}>Upload</MUIButton>
                           </Grid>
                         ) : (
                           <Grid item container md={6} alignItems="center">
                             <Typography align="left">: {(usulanTimSatu.cv.id) ? 'Ada' : 'Tidak Ada'}</Typography>
                             &nbsp;&nbsp;
-                            {(usulanTimSatu.cv.id) ? (<MUIButton style={{border: '1px solid black', borderRadius: '15px 15px'}} onClick={() => {
+                            {(usulanTimSatu.cv.id) ? (<MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 0'}} onClick={() => {
                               window.open(`${baseUrl}/uploads/${usulanTimSatu.cv.filename}.${usulanTimSatu.cv.extension}`, '_blank')
                             }}>
                               Lihat
@@ -873,13 +873,13 @@ class DetailPeluang extends React.Component {
                       <Grid item container md={6}>CV Tim Ahli</Grid>
                         {editTimMode ? (
                           <Grid item container md={6} alignItems="center">
-                            <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px'}} onClick={() => {this.handleToggleUploadWindow(usulanTimDua.id)}}>Upload</MUIButton>
+                            <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 0'}} onClick={() => {this.handleToggleUploadWindow(usulanTimDua.id)}}>Upload</MUIButton>
                           </Grid>
                         ) : (
                           <Grid item container md={6} alignItems="center">
                             <Typography align="left">: {(usulanTimDua.cv.id) ? 'Ada' : 'Tidak Ada'}</Typography>
                             &nbsp;&nbsp;
-                            {(usulanTimDua.cv.id) ? (<MUIButton style={{border: '1px solid black', borderRadius: '15px 15px'}} onClick={() => {
+                            {(usulanTimDua.cv.id) ? (<MUIButton style={{border: '1px solid black', borderRadius: '15px 15px',padding: '0 0'}} onClick={() => {
                               window.open(`${baseUrl}/uploads/${usulanTimDua.cv.filename}.${usulanTimDua.cv.extension}`, '_blank')
                             }}>
                               Lihat
