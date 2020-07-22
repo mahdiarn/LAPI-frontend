@@ -133,7 +133,8 @@ class DataKKH extends React.Component {
                                     id: row.id,
                                     start_time: row.start_time,
                                     end_time: row.end_time,
-                                    kegiatan: row.message
+                                    kegiatan: row.message,
+                                    nip: row.pin
                                   }
                                 })
                                 this.handleToggleEditKKHWindow()
