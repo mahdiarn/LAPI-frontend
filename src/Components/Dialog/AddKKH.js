@@ -52,6 +52,10 @@ function AddKKH(props) {
   const handleSubmit = async (e) => {
     setProgressVisibility(true)
     e.preventDefault()
+    if (kegiatan.length == 0) {
+      alert('Isi Kegiatan!')
+      return setProgressVisibility(false)
+    }
     let payload = {
       kegiatan,
       nip,
@@ -62,8 +66,7 @@ function AddKKH(props) {
     const response = await APIBuilder('log/kkh', payload, 'POST')
     if (response.code !== 200){
       alert('Pembuatan KKH Gagal!')
-      setProgressVisibility(false)
-      return handleClose()
+      return setProgressVisibility(false)
     }
 
     if (response.code === 200) {
