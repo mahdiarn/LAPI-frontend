@@ -52,7 +52,7 @@ function AddKKH(props) {
   const handleSubmit = async (e) => {
     setProgressVisibility(true)
     e.preventDefault()
-    if (kegiatan.length == 0) {
+    if (kegiatan.length === 0) {
       alert('Isi Kegiatan!')
       return setProgressVisibility(false)
     }

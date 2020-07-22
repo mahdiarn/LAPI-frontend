@@ -29,6 +29,7 @@ class DaftarUser extends React.Component {
       filterList: [
         {id: 0, nama: 'Email'},
         {id: 1, nama: 'Password'},
+        {id: 2, nama: 'Nama Lengkap'},
       ]
     }
 
@@ -80,6 +81,7 @@ class DaftarUser extends React.Component {
     let userListView = []
     if (filter === 0) userListView = userList.filter(el => el.email.toLowerCase().includes(searchUser))
     if (filter === 1) userListView = userList.filter(el => el.password.toLowerCase().includes(searchUser))
+    if (filter === 2) userListView = userList.filter(el => el.nama_lengkap && el.nama_lengkap.toLowerCase().includes(searchUser))
     this.setState({
       userListView
     })
