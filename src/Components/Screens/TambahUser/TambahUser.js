@@ -10,6 +10,8 @@ import Input from '../../Button/MainInput'
 
 import {Grid, Typography, TextField, FormControl, InputLabel, MenuItem, Select} from '@material-ui/core'
 
+import AddKKHDialog from '../../Dialog/AddUser'
+
 class TambahUser extends React.Component {
 
   constructor(props) {
@@ -19,12 +21,14 @@ class TambahUser extends React.Component {
       newRole: '',
       newName: '',
       newEmail: '',
-      roleList: []
+      roleList: [],
+      confirmationWindow: false,
     }
 
     this.handleChangeNewName = this.handleChangeNewName.bind(this)
     this.handleChangeNewEmail = this.handleChangeNewEmail.bind(this)
     this.handleChangeNewRole = this.handleChangeNewRole.bind(this)
+    this.handleToggleConfirmationWindow = this.handleToggleConfirmationWindow.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -44,16 +48,7 @@ class TambahUser extends React.Component {
     if (!newRole) return alert('Isi role!')
     if (!newName) return alert('Isi nama lengkap!')
     if (!newEmail) return alert('Isi email!')
-    const response = await APIBuilder('create-user', {nama_lengkap: newName, email: newEmail, role: newRole}, 'POST')
-    if (response.code !== 200){
-      alert('Pembuatan User Gagal!')
-      return
-    }
-
-    alert('Berhasil Membuat User Baru!')
-    this.setState({newName: '',newEmail: '', newRole: ''})
-    return history.push('/tambah-user')
-
+    this.handleToggleConfirmationWindow()
   }
   
   handleChangeNewName = (event) => {
@@ -67,9 +62,14 @@ class TambahUser extends React.Component {
   handleChangeNewRole = (event) => {
     this.setState({newRole: event.target.value})
   }
+
+  handleToggleConfirmationWindow = async (event) => {
+    const { confirmationWindow } = this.state
+    this.setState({confirmationWindow: !(confirmationWindow)})
+  }
   
   render() {
-    const {newRole, newName, newEmail, roleList} = this.state
+    const {newRole, newName, newEmail, roleList, confirmationWindow} = this.state
 
     
 
@@ -81,6 +81,7 @@ class TambahUser extends React.Component {
 
     return (
       <Grid item container>
+        <AddKKHDialog open={confirmationWindow} onClose={this.handleToggleConfirmationWindow} role={newRole} email={newEmail} name={newName}/>
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Tambah User'}/>
         <Grid item container justify="center" alignItems="center" style={{ marginTop: '4em', padding: '0 24em'}}>
           <Grid item container justify="center" md={12} style={{ padding: '15px'}}>
