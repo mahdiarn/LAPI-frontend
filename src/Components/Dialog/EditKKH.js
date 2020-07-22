@@ -34,6 +34,7 @@ function EditKKH(props) {
       const response = await APIBuilder(`nip/by-creator/${Authorization.getId()}`)
       if (response.code === 200) {
         let newNip = []
+        newNip.push(``)
         response.payload.data.forEach((el) => {
           newNip.push(`P${el.pin}`)
         })
@@ -42,14 +43,20 @@ function EditKKH(props) {
     }
 
     let start_date = new Date()
-    if (selectedKKH.start_time) {
+    if (
+      (selectedKKH.start_time) &&
+      (selectedKKH.start_time !== '-')
+    ) {
       start_date.setHours(selectedKKH.start_time.split(':')[0])
       start_date.setMinutes(selectedKKH.start_time.split(':')[1])
       start_date.setSeconds(0)
     }
 
     let end_date = new Date()
-    if (selectedKKH.end_time) {
+    if (
+      (selectedKKH.end_time) &&
+      (selectedKKH.end_time !== '-')
+    ){
       end_date.setHours(selectedKKH.end_time.split(':')[0])
       end_date.setMinutes(selectedKKH.end_time.split(':')[1])
       end_date.setSeconds(0)
@@ -63,9 +70,14 @@ function EditKKH(props) {
     setEndDate(end_date)
 
     getNIPList()
+    if (selectedKKH.nip) {
+      let parsedNIP = "P" + selectedKKH.nip
+      setNip(parsedNIP)
+    }
   }, [selectedKKH]) 
 
   const handleClose = () => {
+    setNip('')
     onClose(selectedValue)
   }
 
@@ -118,6 +130,7 @@ function EditKKH(props) {
           <Grid item md={4}>NIP</Grid>
           <Grid item md={6}>
             <Autocomplete
+              value={nip || ""}
               options={nipList}
               getOptionLabel={option => option}
               renderInput={params => (

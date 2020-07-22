@@ -1,4 +1,5 @@
 export const daftarUserColumns = [
+  { id: 'nama_lengkap', label: 'Nama Lengkap', minWidth: 170 },
   { id: 'email', label: 'Email', minWidth: 170 },
   { id: 'password', label: 'Password', minWidth: 170 }
 ]
