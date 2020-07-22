@@ -566,7 +566,7 @@ class DetailPeluang extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.toggleDetailEditMode} style={{padding: '0 0'}}>{editDetailMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.toggleDetailEditMode} style={{padding: '0 .5em'}}>{editDetailMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -633,7 +633,7 @@ class DetailPeluang extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.togglePemberiKerjaEditMode} style={{padding: '0 0'}}>{editPemberiKerjaMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.togglePemberiKerjaEditMode} style={{padding: '0 .5em'}}>{editPemberiKerjaMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -685,7 +685,7 @@ class DetailPeluang extends React.Component {
                       <Grid item container md={6}>CV Tim Ahli</Grid>
                         {editTimMode ? (
                           <Grid item container md={6} alignItems="center">
-                            <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 0'}} onClick={() => {this.handleToggleUploadWindow(timTerpilih.id)}}>Upload</MUIButton>
+                            <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 .5em'}} onClick={() => {this.handleToggleUploadWindow(timTerpilih.id)}}>Upload</MUIButton>
                           </Grid>
                         ) : (
                           <Grid item container md={6} alignItems="center">
@@ -779,7 +779,7 @@ class DetailPeluang extends React.Component {
                       <Grid item container md={6}>CV Tim Ahli</Grid>
                         {editTimMode ? (
                           <Grid item container md={6} alignItems="center">
-                            <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 0'}} onClick={() => {this.handleToggleUploadWindow(usulanTimSatu.id)}}>Upload</MUIButton>
+                            <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 .5em'}} onClick={() => {this.handleToggleUploadWindow(usulanTimSatu.id)}}>Upload</MUIButton>
                           </Grid>
                         ) : (
                           <Grid item container md={6} alignItems="center">
@@ -873,7 +873,7 @@ class DetailPeluang extends React.Component {
                       <Grid item container md={6}>CV Tim Ahli</Grid>
                         {editTimMode ? (
                           <Grid item container md={6} alignItems="center">
-                            <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 0'}} onClick={() => {this.handleToggleUploadWindow(usulanTimDua.id)}}>Upload</MUIButton>
+                            <MUIButton style={{border: '1px solid black', borderRadius: '15px 15px', padding: '0 .5em'}} onClick={() => {this.handleToggleUploadWindow(usulanTimDua.id)}}>Upload</MUIButton>
                           </Grid>
                         ) : (
                           <Grid item container md={6} alignItems="center">
@@ -936,7 +936,7 @@ class DetailPeluang extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 0'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 .5em'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
             </Grid>  
