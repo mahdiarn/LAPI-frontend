@@ -226,7 +226,7 @@ class DetailProyek extends React.Component {
         selectedRekamJejakPemberiKerja: response.payload.data.proyek.rekam_jejak,
         kontakPersonelPemberiKerja: response.payload.data.proyek.kontak_personel,
         timTerpilih: tim_terpilih,
-        latestLogDate: `${date.getDate()+1}/${date.getMonth()+1}/${date.getFullYear()}`,
+        latestLogDate: moment(date).format('DD/MM/YYYY'),
         latestLogMessage: latestLogResponse.payload.data.message,
         bidangProyek: response.payload.data.proyek.bidang_proyek,
         lokasiProyek: response.payload.data.proyek.lokasi_proyek,
