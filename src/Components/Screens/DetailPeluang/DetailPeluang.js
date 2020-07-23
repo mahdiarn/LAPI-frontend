@@ -408,10 +408,6 @@ class DetailPeluang extends React.Component {
       paList,
       editDetailMode,
       pmName,
-      pcName,
-      paName,
-      klasifikasiPeluang,
-      jenisPengadaanPeluang,
       informasiPembawaPekerjaan,
       selectedKemajuanProyek,
       selectedJenisPengelolaan,
@@ -664,7 +660,7 @@ class DetailPeluang extends React.Component {
                 </Grid>
                 <Grid container alignItems="center">
                   <Grid item container md={6}>Jenis Instansi</Grid>
-                  <Grid item container md={6}><Typography align="left">: {(jenisPemberiKerjaList.filter(el => el.value===jenisPemberiKerja)[0]) ? jenisPemberiKerjaList.filter(el => el.value===klasifikasiPeluang)[0].name : '-'}</Typography></Grid>
+                  <Grid item container md={6}><Typography align="left">: {(jenisPemberiKerjaList.filter(el => el.value===jenisPemberiKerja)[0]) ? jenisPemberiKerjaList.filter(el => el.value===jenisPemberiKerja)[0].name : '-'}</Typography></Grid>
                 </Grid>
                 <Grid container alignItems="center">
                   <Grid item container md={6}>Kontak Personal</Grid>
