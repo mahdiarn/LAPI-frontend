@@ -239,14 +239,14 @@ class DetailProyek extends React.Component {
         pembayaranList: pembayaranListTemp,
         terminList: terminResponse.payload.data,
         nomorSP3Input: latestSP3SLFNumberResponse.payload.data + 1,
-        nomorKontrakInput: response.payload.data.proyek.nomor_kontrak,
-        tanggalKontrakInput: response.payload.data.proyek.tanggal_kontrak,
-        amandemenKontrakInput: response.payload.data.proyek.amandemen_kontrak,
-        tanggalSP3Input: response.payload.data.proyek.tanggal_sp3,
-        tanggalMulaiProyekInput: response.payload.data.proyek.tanggal_mulai_proyek,
-        tanggalSelesaiProyekInput: response.payload.data.proyek.tanggal_selesai_proyek,
-        tanggalSelesaiKontrakInput: response.payload.data.proyek.tanggal_selesai_kontrak,
-        tanggalSelesaiAmandemenInput: response.payload.data.proyek.tanggal_selesai_amandemen,
+        nomorKontrakInput: response.payload.data.proyek.nomor_kontrak ? response.payload.data.proyek.nomor_kontrak : '',
+        tanggalKontrakInput: response.payload.data.proyek.tanggal_kontrak ? moment(response.payload.data.proyek.tanggal_kontrak).format('YYYY-MM-DD') : '',
+        amandemenKontrakInput: response.payload.data.proyek.amandemen_kontrak ? moment(response.payload.data.proyek.amandemen_kontrak).format('YYYY-MM-DD') : '',
+        tanggalSP3Input: response.payload.data.proyek.tanggal_sp3 ? moment(response.payload.data.proyek.tanggal_sp3).format('YYYY-MM-DD') : '',
+        tanggalMulaiProyekInput: response.payload.data.proyek.tanggal_mulai_proyek ? moment(response.payload.data.proyek.tanggal_mulai_proyek).format('YYYY-MM-DD') : '',
+        tanggalSelesaiProyekInput: response.payload.data.proyek.tanggal_selesai_proyek ? moment(response.payload.data.proyek.tanggal_selesai_proyek).format('YYYY-MM-DD') : '',
+        tanggalSelesaiKontrakInput: response.payload.data.proyek.tanggal_selesai_kontrak ? moment(response.payload.data.proyek.tanggal_selesai_kontrak).format('YYYY-MM-DD') : '',
+        tanggalSelesaiAmandemenInput: response.payload.data.proyek.tanggal_selesai_amandemen ? moment(response.payload.data.proyek.tanggal_selesai_amandemen).format('YYYY-MM-DD') : '',
 
       })
       if(response.payload.data.proyek.status === Constants.PELUANG_STATUS_HOLD) {
@@ -353,9 +353,13 @@ class DetailProyek extends React.Component {
       if (response.code === 200) {
         alert('Berhasil ubah detail Kontrak dan SP3!')
         this.refreshData()
+        this.setState({editKontrakSP3Mode: !editKontrakSP3Mode})
+      } else {
+        alert('Gagal ubah detail Kontrak dan SP3!')
       }
+    } else {
+      this.setState({editKontrakSP3Mode: !editKontrakSP3Mode})
     }
-    this.setState({editKontrakSP3Mode: !editKontrakSP3Mode})
   }
 
   togglePemberiKerjaEditMode = async () => {
@@ -699,7 +703,7 @@ class DetailProyek extends React.Component {
       <Grid item container>
         {
           alertCetakSP3 ? (
-            <Alert zIndex="999" variant="filled" severity="success" style={{position:'fixed', top:0, left:0, right:0}} onClose={this.setAlerCetakSP3}>
+            <Alert variant="filled" severity="success" style={{position:'fixed', top:0, left:0, right:0, zIndex: 999}} onClose={this.setAlerCetakSP3}>
               Berhasil cetak sp3! klik <a href={`${baseUrl}/${sp3Url}`} rel="next noopener noreferrer" target="_blank">di sini</a> untuk melihatnya
             </Alert>
           ) : (
