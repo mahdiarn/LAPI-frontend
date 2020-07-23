@@ -49,7 +49,6 @@ class Akun extends React.Component {
     }
     const response = await APIBuilder('change-password', payload, 'POST')
     if (response.code !== 200){
-      console.log(response)
       alert(response.payload.msg)
       return
     }

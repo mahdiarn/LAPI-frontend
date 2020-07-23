@@ -125,7 +125,7 @@ class DaftarPengalaman extends React.Component {
     return (
       <Grid item container>
         <Navbar role={Authorization.getRole()} email={Authorization.getEmail()} title={'Daftar Pengalaman'}/>
-        <Grid item container justify="center" alignItems="center" style={{padding: (window.innerWidth <= 600) ? '0' : '0 4em'}}>
+        <Grid item container justify="center" alignItems="center" style={{padding: (window.innerWidth <= 600) ? '0' : '4em 4em'}}>
           <Paper>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>

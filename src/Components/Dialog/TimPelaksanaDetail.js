@@ -44,7 +44,6 @@ function TimPelaksanaDetail(props) {
     setPenandatangananSP3(penandatangananSP3)
     setTenagaAhli(tenagaAhli)
     getKK()
-    console.log(tenagaAhli)
   }, [
     penandatangananSP3,
     tenagaAhli
