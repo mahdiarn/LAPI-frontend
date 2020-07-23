@@ -58,14 +58,14 @@ class DetailPeluang extends React.Component {
       jenisPengadaanPeluang: 0,
       informasiPembawaPekerjaan: 0,
       editDetailMode: false,
-      selectedKemajuanProyek: 0,
-      selectedKonsorsium: 0,
-      selectedJenisPengelolaan: 0,
-      selectedLingkupProyek: 0,
-      selectedPC: 0,
-      selectedPA: 0,
+      selectedKemajuanProyek: {name: '-', value: 0},
+      selectedKonsorsium: {name: '-', value: 0},
+      selectedJenisPengelolaan: {name: '-', value: 0},
+      selectedLingkupProyek: {name: '-', value: 0},
+      selectedPC: {nama_lengkap: '-', id: 0},
+      selectedPA: {nama_lengkap: '-', id: 0},
       editPemberiKerjaMode: false,
-      selectedRekamJejakPemberiKerja: false,
+      selectedRekamJejakPemberiKerja: {name: '-', value: 0},
       timTerpilih: {},
       usulanTimSatu: {},
       usulanTimDua: {},
@@ -73,9 +73,13 @@ class DetailPeluang extends React.Component {
       latestLogDate: '',
       latestLogMessage: '',
       uploadCvTimId: 0,
+      selectedKlasifikasiProyek: {name: '-', value: 0},
+      selectedJenisPengadaan: {name: '-', value: 0},
     }
 
     this.handleToggleUploadWindow = this.handleToggleUploadWindow.bind(this)
+    this.setKlasifikasiProyek = this.setKlasifikasiProyek.bind(this)
+    this.setJenisPengadaan = this.setJenisPengadaan.bind(this)
     this.setKemajuanProyek = this.setKemajuanProyek.bind(this)
     this.setKontakPersonelPemberiKerja = this.setKontakPersonelPemberiKerja.bind(this)
     this.setKonsorsium = this.setKonsorsium.bind(this)
@@ -92,6 +96,7 @@ class DetailPeluang extends React.Component {
 
   async refreshData() {
     const {id} = this.props.match.params
+    const {pcList, paList} = this.state
     try{
       const response = await APIBuilder(`peluang-proyek/${id}`)
       const latestLogResponse = await APIBuilder(`log/latest/${id}`)
@@ -145,26 +150,28 @@ class DetailPeluang extends React.Component {
         pmName: response.payload.data.PM,
         pcName: (response.payload.data.PC) ? response.payload.data.PC : '',
         paName: (response.payload.data.PA) ? response.payload.data.PA : '',
-        selectedPC : (response.payload.data.PC_ID) ? response.payload.data.PC_ID : 0,
-        selectedPA : (response.payload.data.PA_ID) ? response.payload.data.PA_ID : 0,
+        selectedPC : (pcList.filter(el => el.id===response.payload.data.PC_ID)[0]) ? pcList.filter(el => el.id===response.payload.data.PC_ID)[0] : {nama_lengkap: '-', id: 0},
+        selectedPA : (paList.filter(el => el.id===response.payload.data.PA_ID)[0]) ? paList.filter(el => el.id===response.payload.data.PA_ID)[0] : {nama_lengkap: '-', id: 0},
         peluangName: response.payload.data.nama,
         klasifikasiPeluang: response.payload.data.klasifikasi,
         jenisPengadaanPeluang: response.payload.data.pengadaan,
         informasiPembawaPekerjaan: response.payload.data.informasi_pembawa_pekerjaan,
-        selectedKemajuanProyek: response.payload.data.kemajuan_proyek,
-        selectedKonsorsium: response.payload.data.is_konsorsium,
-        selectedJenisPengelolaan: response.payload.data.jenis_pengelolaan,
-        selectedLingkupProyek: response.payload.data.lingkup_proyek,
+        selectedKemajuanProyek: (kemajuanProyekList.filter(el => el.value===response.payload.data.kemajuan_proyek)[0]) ? kemajuanProyekList.filter(el => el.value===response.payload.data.kemajuan_proyek)[0] : {name: '-', value: 0},
+        selectedKonsorsium: (konsorsium.filter(el => el.value===response.payload.data.is_konsorsium)[0]) ? konsorsium.filter(el => el.value===response.payload.data.is_konsorsium)[0] : {name: '-', value: 0},
+        selectedJenisPengelolaan: (jenisPengelolaanList.filter(el => el.value===response.payload.data.jenis_pengelolaan)[0]) ? jenisPengelolaanList.filter(el => el.value===response.payload.data.jenis_pengelolaan)[0] : {name: '-', value: 0},
+        selectedLingkupProyek: (lingkupProyekList.filter(el => el.value===response.payload.data.lingkup_proyek)[0]) ? lingkupProyekList.filter(el => el.value===response.payload.data.lingkup_proyek)[0] : {name: '-', value: 0},
         namaPemberiKerja: response.payload.data.nama_pemberi_kerja,
         alamatPemberiKerja: response.payload.data.alamat_pemberi_kerja,
         jenisPemberiKerja: response.payload.data.jenis_pemberi_kerja,
-        selectedRekamJejakPemberiKerja: response.payload.data.rekam_jejak,
+        selectedRekamJejakPemberiKerja: (rekamJejakPemberiKerjaList.filter(el => el.value===response.payload.data.rekam_jejak)[0]) ? rekamJejakPemberiKerjaList.filter(el => el.value===response.payload.data.rekam_jejak)[0] : {name: '-', value: 0},
         kontakPersonelPemberiKerja: response.payload.data.kontak_personel,
         timTerpilih: tim_terpilih,
         usulanTimSatu: usulan_tim_1,
         usulanTimDua: usulan_tim_2,
         latestLogDate: isNaN(date.getDate()+1) ? `-` : `${date.getDate()+1}/${date.getMonth()+1}/${date.getFullYear()}`,
-        latestLogMessage: latestLogResponse.payload.data.message || `-`
+        latestLogMessage: latestLogResponse.payload.data.message || `-`,
+        selectedKlasifikasiProyek: (klasifikasiProyekList.filter(el => el.value===response.payload.data.klasifikasi)[0]) ? klasifikasiProyekList.filter(el => el.value===response.payload.data.klasifikasi)[0] : {name: '-', value: 0},
+        selectedJenisPengadaan: (jenisPengadaanList.filter(el => el.value===response.payload.data.pengadaan)[0]) ? jenisPengadaanList.filter(el => el.value===response.payload.data.pengadaan)[0] : {name: '-', value: 0},
       })
     } catch (error) {
       history.push('/')
@@ -198,24 +205,40 @@ class DetailPeluang extends React.Component {
   }
 
   toggleDetailEditMode = async () => {
-    const {editDetailMode, selectedPC, selectedPA, selectedKemajuanProyek, selectedJenisPengelolaan, selectedLingkupProyek, selectedKonsorsium} = this.state
+    const {
+      editDetailMode,
+      selectedPC,
+      selectedPA,
+      selectedKemajuanProyek,
+      selectedJenisPengelolaan,
+      selectedLingkupProyek,
+      selectedKonsorsium,
+      selectedKlasifikasiProyek,
+      selectedJenisPengadaan,
+    } = this.state
     const {id} = this.props.match.params
     if (editDetailMode) {
       const payload = {
-        kemajuan_proyek: selectedKemajuanProyek,
-        jenis_pengelolaan: selectedJenisPengelolaan,
-        lingkup_proyek: selectedLingkupProyek,
-        is_konsorsium: selectedKonsorsium,
-        pc: selectedPC,
-        pa: selectedPA
+        kemajuan_proyek: selectedKemajuanProyek.value,
+        jenis_pengelolaan: selectedJenisPengelolaan.value,
+        lingkup_proyek: selectedLingkupProyek.value,
+        is_konsorsium: selectedKonsorsium.value,
+        klasifikasi: selectedKlasifikasiProyek.value,
+        pengadaan: selectedJenisPengadaan.value,
+        pc: selectedPC.id,
+        pa: selectedPA.id,
       }
       const response = await APIBuilder(`peluang-proyek/${id}`, payload, 'POST')
       if (response.code === 200) {
         alert('Berhasil ubah detail peluang!')
         this.refreshData()
+        this.setState({editDetailMode: !editDetailMode})
+      } else {
+        alert('Gagal ubah detail peluang!')
       }
+    } else {
+      this.setState({editDetailMode: !editDetailMode})
     }
-    this.setState({editDetailMode: !editDetailMode})
   }
 
   togglePemberiKerjaEditMode = async () => {
@@ -225,7 +248,7 @@ class DetailPeluang extends React.Component {
     if (editPemberiKerjaMode) {
       const payload = {
         kontak_personel: kontakPersonelPemberiKerja,
-        rekam_jejak: selectedRekamJejakPemberiKerja
+        rekam_jejak: selectedRekamJejakPemberiKerja.value
       }
       const response = await APIBuilder(`peluang-proyek/${id}`, payload, 'POST')
       if (response.code === 200) {
@@ -261,6 +284,14 @@ class DetailPeluang extends React.Component {
       }
     }
     this.setState({editTimMode: !editTimMode})
+  }
+
+  setKlasifikasiProyek = (values) => {
+    this.setState({selectedKlasifikasiProyek: values})
+  }
+
+  setJenisPengadaan = (values) => {
+    this.setState({selectedJenisPengadaan: values})
   }
 
   setKemajuanProyek = (values) => {
@@ -398,7 +429,11 @@ class DetailPeluang extends React.Component {
       editTimMode,
       kkList,
       latestLogDate,
-      latestLogMessage
+      latestLogMessage,
+      selectedKlasifikasiProyek,
+      selectedJenisPengadaan,
+      selectedPC,
+      selectedPA,
     } = this.state
     const {peluang} = this.state
 
@@ -443,17 +478,18 @@ class DetailPeluang extends React.Component {
                   { editDetailMode ? (
                     <Grid item container md={6}>
                       <Autocomplete
+                        value={selectedPC}
                         options={pcList}
                         getOptionLabel={option => option.nama_lengkap}
                         style={{width: '100%'}}
                         renderInput={params => (
                           <TextField {...params} label="PC" variant="outlined" fullWidth />
                         )}
-                        onChange={(event, values) => this.setPC(values.id)}
+                        onChange={(event, values) => this.setPC(values || {nama_lengkap: '-', value: 0})}
                       />
                     </Grid>
                   ) : (
-                    <Grid item container md={6}><Typography align="left">: {pcName || '-'}</Typography></Grid>
+                    <Grid item container md={6}><Typography align="left">: {selectedPC.nama_lengkap}</Typography></Grid>
                   )}
                 </Grid>
                 <Grid container alignItems="center">
@@ -461,17 +497,18 @@ class DetailPeluang extends React.Component {
                   { editDetailMode ? (
                     <Grid item container md={6}>
                       <Autocomplete
+                        value={selectedPA}
                         options={paList}
                         getOptionLabel={option => option.nama_lengkap}
                         style={{width: '100%'}}
                         renderInput={params => (
                           <TextField {...params} label="PA" variant="outlined" fullWidth />
                         )}
-                        onChange={(event, values) => this.setPA(values.id)}
+                        onChange={(event, values) => this.setPA(values || {nama_lengkap: '-', value: 0})}
                       />
                     </Grid>
                   ) : (
-                    <Grid item container md={6}><Typography align="left">: {paName || '-'}</Typography></Grid>
+                    <Grid item container md={6}><Typography align="left">: {selectedPA.nama_lengkap}</Typography></Grid>
                   )}
                 </Grid>
                 <Grid container alignItems="center">
@@ -480,11 +517,41 @@ class DetailPeluang extends React.Component {
                 <Divider />
                 <Grid container alignItems="center">
                   <Grid item container md={6}>Klasifikasi Proyek</Grid>
-                  <Grid item container md={6}><Typography align="left">: {(klasifikasiProyekList.filter(el => el.value===klasifikasiPeluang)[0]) ? klasifikasiProyekList.filter(el => el.value===klasifikasiPeluang)[0].name : '-'}</Typography></Grid>
+                  { editDetailMode ? (
+                    <Grid item container md={6}>
+                      <Autocomplete
+                        value={selectedKlasifikasiProyek}
+                        options={klasifikasiProyekList}
+                        getOptionLabel={option => option.name}
+                        style={{width: '100%'}}
+                        renderInput={params => (
+                          <TextField {...params} label="Klasifikasi Proyek" variant="outlined" fullWidth />
+                        )}
+                        onChange={(event, values) => this.setKlasifikasiProyek(values || {name: '-', value: 0})}
+                      />
+                    </Grid>
+                  ) : (
+                    <Grid item container md={6}><Typography align="left">: {selectedKlasifikasiProyek.name}</Typography></Grid>
+                  )}
                 </Grid>
                 <Grid container alignItems="center">
                   <Grid item container md={6}>Proses Pengadaan</Grid>
-                  <Grid item container md={6}><Typography align="left">: {(jenisPengadaanList.filter(el => el.value===jenisPengadaanPeluang)[0]) ? jenisPengadaanList.filter(el => el.value===jenisPengadaanPeluang)[0].name : '-'}</Typography></Grid>
+                  { editDetailMode ? (
+                    <Grid item container md={6}>
+                      <Autocomplete
+                        value={selectedJenisPengadaan}
+                        options={jenisPengadaanList}
+                        getOptionLabel={option => option.name}
+                        style={{width: '100%'}}
+                        renderInput={params => (
+                          <TextField {...params} label="Jenis Pengadaan" variant="outlined" fullWidth />
+                        )}
+                        onChange={(event, values) => this.setJenisPengadaan(values || {name: '-', value: 0})}
+                      />
+                    </Grid>
+                  ) : (
+                    <Grid item container md={6}><Typography align="left">: {selectedJenisPengadaan.name}</Typography></Grid>
+                  )}
                 </Grid>
                 <Grid container alignItems="center">
                   <Grid item container md={6}>Informasi Pekerjaan</Grid>
@@ -495,17 +562,18 @@ class DetailPeluang extends React.Component {
                   { editDetailMode ? (
                     <Grid item container md={6}>
                       <Autocomplete
+                        value={selectedKemajuanProyek}
                         options={kemajuanProyekList}
                         getOptionLabel={option => option.name}
                         style={{width: '100%'}}
                         renderInput={params => (
                           <TextField {...params} label="Kemajuan Proyek" variant="outlined" fullWidth />
                         )}
-                        onChange={(event, values) => this.setKemajuanProyek(values.value)}
+                        onChange={(event, values) => this.setKemajuanProyek(values || {name: '-', value: 0})}
                       />
                     </Grid>
                   ) : (
-                    <Grid item container md={6}><Typography align="left">: {(kemajuanProyekList.filter(el => el.value===selectedKemajuanProyek)[0]) ? kemajuanProyekList.filter(el => el.value===selectedKemajuanProyek)[0].name : '-'}</Typography></Grid>
+                    <Grid item container md={6}><Typography align="left">: {selectedKemajuanProyek.name}</Typography></Grid>
                   )}
                 </Grid>
                 <Grid container alignItems="center">
@@ -513,17 +581,18 @@ class DetailPeluang extends React.Component {
                   { editDetailMode ? (
                     <Grid item container md={6}>
                       <Autocomplete
+                        value={selectedKonsorsium}
                         options={konsorsium}
                         getOptionLabel={option => option.name}
                         style={{width: '100%'}}
                         renderInput={params => (
                           <TextField {...params} label="Konsorsium" variant="outlined" fullWidth />
                         )}
-                        onChange={(event, values) => this.setKonsorsium(values.value)}
+                        onChange={(event, values) => this.setKonsorsium(values || {name: '-', value: 0})}
                       />
                     </Grid>
                   ) : (
-                    <Grid item container md={6}><Typography align="left">: {(konsorsium.filter(el => el.value===selectedKonsorsium)[0]) ? konsorsium.filter(el => el.value===selectedKonsorsium)[0].name : '-'}</Typography></Grid>
+                    <Grid item container md={6}><Typography align="left">: {selectedKonsorsium.name}</Typography></Grid>
                   )}
                 </Grid>
                 <Grid container alignItems="center">
@@ -531,17 +600,18 @@ class DetailPeluang extends React.Component {
                   { editDetailMode ? (
                     <Grid item container md={6}>
                       <Autocomplete
+                        value={selectedJenisPengelolaan}
                         options={jenisPengelolaanList}
                         getOptionLabel={option => option.name}
                         style={{width: '100%'}}
                         renderInput={params => (
                           <TextField {...params} label="Jenis Pengelolaan" variant="outlined" fullWidth />
                         )}
-                        onChange={(event, values) => this.setJenisPengelolaan(values.value)}
+                        onChange={(event, values) => this.setJenisPengelolaan(values || {name: '-', value: 0})}
                       />
                     </Grid>
                   ) : (
-                    <Grid item container md={6}><Typography align="left">: {(jenisPengelolaanList.filter(el => el.value===selectedJenisPengelolaan)[0]) ? jenisPengelolaanList.filter(el => el.value===selectedJenisPengelolaan)[0].name : '-'}</Typography></Grid>
+                    <Grid item container md={6}><Typography align="left">: {selectedJenisPengelolaan.name}</Typography></Grid>
                   )}
                 </Grid>
                 <Grid container alignItems="center">
@@ -549,17 +619,18 @@ class DetailPeluang extends React.Component {
                   { editDetailMode ? (
                   <Grid item container md={6}>
                     <Autocomplete
+                      value={selectedLingkupProyek}
                       options={lingkupProyekList}
                       getOptionLabel={option => option.name}
                       style={{width: '100%'}}
                       renderInput={params => (
                         <TextField {...params} label="Lingkup Proyek" variant="outlined" fullWidth />
                       )}
-                      onChange={(event, values) => this.setLingkupProyek(values.value)}
+                      onChange={(event, values) => this.setLingkupProyek(values || {name: '-', value: 0})}
                     />
                   </Grid>
                 ) : (
-                  <Grid item container md={6}><Typography align="left">: {(lingkupProyekList.filter(el => el.value===selectedLingkupProyek)[0]) ? lingkupProyekList.filter(el => el.value===selectedLingkupProyek)[0].name : '-'}</Typography></Grid>
+                  <Grid item container md={6}><Typography align="left">: {selectedLingkupProyek.name}</Typography></Grid>
                   )}
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
@@ -616,16 +687,17 @@ class DetailPeluang extends React.Component {
                   <Grid item container md={6}>
                     {editPemberiKerjaMode ? (
                       <Autocomplete
+                        value={selectedRekamJejakPemberiKerja}
                         options={rekamJejakPemberiKerjaList}
                         getOptionLabel={option => option.name}
                         style={{width: '100%'}}
                         renderInput={params => (
                           <TextField {...params} label="Rekam Jejak" variant="outlined" fullWidth />
                         )}
-                        onChange={(event, values) => this.setRekamJejakPemberiKerja(values.value)}
+                        onChange={(event, values) => this.setRekamJejakPemberiKerja(values || {name: '-', value: 0})}
                       />
                     ) : (
-                      <Typography align="left">: {(rekamJejakPemberiKerjaList.filter(el => el.value===selectedRekamJejakPemberiKerja)[0]) ? rekamJejakPemberiKerjaList.filter(el => el.value===selectedRekamJejakPemberiKerja)[0].name : '-'}</Typography>
+                      <Typography align="left">: {selectedRekamJejakPemberiKerja.name}</Typography>
                     )}
                   </Grid>
                 </Grid>
