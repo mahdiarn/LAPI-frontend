@@ -17,9 +17,13 @@ import {
   TextField,
   Button as MUIButton  
 } from '@material-ui/core'
+
+import OutlinedButton from '../../Button/MainButtonOutlined'
+
 import { Autocomplete } from '@material-ui/lab'
 
 import UploadDialog from '../../Dialog/Upload'
+import AddTimForm from '../../Form/AddTimForm'
 
 import {
   klasifikasiProyek as klasifikasiProyekList,
@@ -75,6 +79,25 @@ class DetailPeluang extends React.Component {
       uploadCvTimId: 0,
       selectedKlasifikasiProyek: {name: '-', value: 0},
       selectedJenisPengadaan: {name: '-', value: 0},
+      timList: [],
+      namaKetuaUsulanTimSatu: '',
+      namaPMUsulanTimSatu: '',
+      emailUsulanTimSatu: '',
+      selectedKelompokKeahlianUsulanTimSatu: '',
+      addUsulanTimSatuFormVisibility: false,
+      namaKetuaUsulanTimDua: '',
+      namaPMUsulanTimDua: '',
+      emailUsulanTimDua: '',
+      selectedKelompokKeahlianUsulanTimDua: '',
+      addUsulanTimDuaFormVisibility: false,
+      namaKetuaTimTerpilih: '',
+      namaPMTimTerpilih: '',
+      emailTimTerpilih: '',
+      selectedKelompokKeahlianTimTerpilih: '',
+      addTimTerpilihFormVisibility: false,
+      selectedUsulanTimSatu: '',
+      selectedUsulanTimDua: '',
+      selectedTimTerpilih: ''
     }
 
     this.handleToggleUploadWindow = this.handleToggleUploadWindow.bind(this)
@@ -88,6 +111,24 @@ class DetailPeluang extends React.Component {
     this.setPC = this.setPC.bind(this)
     this.setPA = this.setPA.bind(this)
     this.setRekamJejakPemberiKerja = this.setRekamJejakPemberiKerja.bind(this)
+    this.setSelectedUsulanTimSatu = this.setSelectedUsulanTimSatu.bind(this)
+    this.setNamaKetuaUsulanTimSatu = this.setNamaKetuaUsulanTimSatu.bind(this)
+    this.setNamaPMUsulanTimSatu = this.setNamaPMUsulanTimSatu.bind(this)
+    this.setEmailUsulanTimSatu = this.setEmailUsulanTimSatu.bind(this)
+    this.setSelectedKelompokKeahlianUsulanTimSatu = this.setSelectedKelompokKeahlianUsulanTimSatu.bind(this)
+    this.toggleAddUsulanTimSatuForm = this.toggleAddUsulanTimSatuForm.bind(this)
+    this.setSelectedUsulanTimDua = this.setSelectedUsulanTimDua.bind(this)
+    this.setNamaKetuaUsulanTimDua = this.setNamaKetuaUsulanTimDua.bind(this)
+    this.setNamaPMUsulanTimDua = this.setNamaPMUsulanTimDua.bind(this)
+    this.setEmailUsulanTimDua = this.setEmailUsulanTimDua.bind(this)
+    this.setSelectedKelompokKeahlianUsulanTimDua = this.setSelectedKelompokKeahlianUsulanTimDua.bind(this)
+    this.toggleAddUsulanTimDuaForm = this.toggleAddUsulanTimDuaForm.bind(this)
+    this.setSelectedTimTerpilih = this.setSelectedTimTerpilih.bind(this)
+    this.setNamaKetuaTimTerpilih = this.setNamaKetuaTimTerpilih.bind(this)
+    this.setNamaPMTimTerpilih = this.setNamaPMTimTerpilih.bind(this)
+    this.setEmailTimTerpilih = this.setEmailTimTerpilih.bind(this)
+    this.setSelectedKelompokKeahlianTimTerpilih = this.setSelectedKelompokKeahlianTimTerpilih.bind(this)
+    this.toggleAddTimTerpilihForm = this.toggleAddTimTerpilihForm.bind(this)
     this.acceptProject = this.acceptProject.bind(this)
     this.rejectProject = this.rejectProject.bind(this)
     this.acceptTimSatu = this.acceptTimSatu.bind(this)
@@ -197,6 +238,11 @@ class DetailPeluang extends React.Component {
     const paListResponse = await APIBuilder(`pa`)
     if (paListResponse.code === 200) this.setState({paList: paListResponse.payload.data})
     this.refreshData()
+
+    const timListResponse = await APIBuilder('tim')
+      if (timListResponse.code === 200 && (!timListResponse.error)) {
+        this.setState({timList: timListResponse.payload.data})
+      }
   }
 
   handleToggleUploadWindow = (value) => {
@@ -365,6 +411,81 @@ class DetailPeluang extends React.Component {
     this.setState({usulanTimDua: usulan_tim})
   }
 
+  setNamaKetuaUsulanTimSatu = (values) => {
+    this.setState({namaKetuaUsulanTimSatu: values})
+  }
+
+  setNamaPMUsulanTimSatu = (values) => {
+    this.setState({namaPMUsulanTimSatu: values})
+  }
+
+  setEmailUsulanTimSatu = (values) => {
+    this.setState({emailUsulanTimSatu: values})
+  }
+
+  setSelectedKelompokKeahlianUsulanTimSatu = (values) => {
+    this.setState({selectedKelompokKeahlianUsulanTimSatu: values})
+  }
+
+  setSelectedUsulanTimSatu = (values) => {
+    this.setState({selectedUsulanTimSatu: values})
+  }
+
+  toggleAddUsulanTimSatuForm = () => {
+    const {addUsulanTimSatuFormVisibility} = this.state
+    this.setState({addUsulanTimSatuFormVisibility: !addUsulanTimSatuFormVisibility})
+  }
+
+  setNamaKetuaUsulanTimDua = (values) => {
+    this.setState({namaKetuaUsulanTimDua: values})
+  }
+
+  setNamaPMUsulanTimDua = (values) => {
+    this.setState({namaPMUsulanTimDua: values})
+  }
+
+  setEmailUsulanTimDua = (values) => {
+    this.setState({emailUsulanTimDua: values})
+  }
+
+  setSelectedKelompokKeahlianUsulanTimDua = (values) => {
+    this.setState({selectedKelompokKeahlianUsulanTimDua: values})
+  }
+
+  setSelectedUsulanTimDua = (values) => {
+    this.setState({selectedUsulanTimDua: values})
+  }
+
+  toggleAddUsulanTimDuaForm = () => {
+    const {addUsulanTimDuaFormVisibility} = this.state
+    this.setState({addUsulanTimDuaFormVisibility: !addUsulanTimDuaFormVisibility})
+  }
+
+  setNamaKetuaTimTerpilih = (values) => {
+    this.setState({namaKetuaTimTerpilih: values})
+  }
+
+  setNamaPMTimTerpilih = (values) => {
+    this.setState({namaPMTimTerpilih: values})
+  }
+
+  setEmailTimTerpilih = (values) => {
+    this.setState({emailTimTerpilih: values})
+  }
+
+  setSelectedKelompokKeahlianTimTerpilih = (values) => {
+    this.setState({selectedKelompokKeahlianTimTerpilih: values})
+  }
+
+  setSelectedTimTerpilih = (values) => {
+    this.setState({selectedTimTerpilih: values})
+  }
+
+  toggleAddTimTerpilihForm = () => {
+    const {addTimTerpilihFormVisibility} = this.state
+    this.setState({addTimTerpilihFormVisibility: !addTimTerpilihFormVisibility})
+  }
+
   acceptProject = async() => {
     const {timTerpilih} = this.state
     if (timTerpilih.cv.id) {
@@ -400,6 +521,59 @@ class DetailPeluang extends React.Component {
     this.refreshData()
   }
 
+  selectUsulanTim = async (usulanTim = 0, selectedUsulanTimId = null) => {
+    const {id} = this.props.match.params
+    const payload = {}
+    let message = ''
+    switch (usulanTim) {
+      case 1:
+        payload.usulan_tim_1 = selectedUsulanTimId
+        message = 'Berhasil memilih usulan tim 1!'
+        break
+      case 2:
+        payload.usulan_tim_2 = selectedUsulanTimId
+        message = 'Berhasil memilih usulan tim 2!'
+        break
+      default:
+        payload.tim_terpilih = selectedUsulanTimId
+        message = 'Berhasil memilih tim pelaksana!'
+    }
+
+    const response = await APIBuilder(`peluang-proyek/${id}`, payload, 'POST')
+    if (response.code === 200) {
+      alert(message)
+      this.refreshData()
+    } else {
+      alert(`Gagal memilih usulan tim! error message: ${response.payload.data}`)
+    }
+  }
+
+  createAndSelectUsulanTim = async (usulanTim = 0, data) => {
+    const {id} = this.props.match.params
+    const payload = {
+      usulan_tim: usulanTim,
+      ...data
+    }
+    let message = ''
+    switch (usulanTim) {
+      case 1:
+        message = 'Berhasil membuat usulan tim 1!'
+        break
+      case 2:
+        message = 'Berhasil membuat usulan tim 2!'
+        break
+      default:
+        message = 'Berhasil membuat tim pelaksana!'
+    }
+    const response = await APIBuilder(`peluang-proyek/${id}/create-tim`, payload, 'POST')
+    if (response.code === 200) {
+      alert(message)
+      this.refreshData()
+    } else {
+      alert(`Gagal membuat tim! error message: ${response.payload.data}`)
+    }
+  }
+
   render() {
     const {uploadWindow, peluangName, uploadCvTimId} = this.state
     const {id} = this.props.match.params
@@ -430,6 +604,25 @@ class DetailPeluang extends React.Component {
       selectedJenisPengadaan,
       selectedPC,
       selectedPA,
+      namaKetuaUsulanTimSatu,
+      namaPMUsulanTimSatu,
+      emailUsulanTimSatu,
+      selectedKelompokKeahlianUsulanTimSatu,
+      addUsulanTimSatuFormVisibility,
+      namaKetuaUsulanTimDua,
+      namaPMUsulanTimDua,
+      emailUsulanTimDua,
+      selectedKelompokKeahlianUsulanTimDua,
+      addUsulanTimDuaFormVisibility,
+      namaKetuaTimTerpilih,
+      namaPMTimTerpilih,
+      emailTimTerpilih,
+      selectedKelompokKeahlianTimTerpilih,
+      addTimTerpilihFormVisibility,
+      timList,
+      selectedUsulanTimSatu,
+      selectedUsulanTimDua,
+      selectedTimTerpilih,
     } = this.state
     const {peluang} = this.state
 
@@ -726,9 +919,9 @@ class DetailPeluang extends React.Component {
             </Grid>  
             <Grid item container justify="center" alignItems="center" md={4}>
               <Paper style={{width: '100%', padding: '1em 1.5em'}}>
-                <Typography variant="h5">Usulan Tim Pelaksana</Typography>
+                <Typography variant="h5">{timTerpilih.id ? '' : 'Usulan'} Tim Pelaksana</Typography>
                 <Divider />
-                {(timTerpilih.namaKetua) ? (
+                {(timTerpilih.id) ? (
                   <div>
                     <Grid container alignItems="center" justify="flex-end">
                       <Grid item container md={6} justify="flex-end">Tim Terpilih</Grid>
@@ -811,7 +1004,7 @@ class DetailPeluang extends React.Component {
                 ) : (
                   <div></div>
                 )}
-                {(usulanTimSatu.namaKetua && !timTerpilih.namaKetua) ? (
+                {(usulanTimSatu.id && !timTerpilih.namaKetua) ? (
                   <div>
                     <Grid container alignItems="center" justify="flex-end">
                       &nbsp;
@@ -897,16 +1090,16 @@ class DetailPeluang extends React.Component {
                         )}
                       </Grid>
                     </Grid>
-                    <Grid container alignItems="center">
-                      &nbsp;
-                    </Grid>
-                    <Divider />
                   </div>
                 ) : (
                   <div></div>
                 )}
-                {(usulanTimDua.namaKetua && !timTerpilih.namaKetua) ? (
+                {(usulanTimDua.id && !timTerpilih.namaKetua) ? (
                   <div>
+                    <Grid container alignItems="center">
+                      &nbsp;
+                    </Grid>
+                    <Divider />
                     <Grid container alignItems="flex-start" justify="flex-end">
                       &nbsp;
                     </Grid>
@@ -999,12 +1192,209 @@ class DetailPeluang extends React.Component {
                 ) : (
                   <div></div>
                 )}
-                
+                {/* Create tim or select usulan tim */}
+                {
+                  (
+                    (informasiPembawaPekerjaan === Constants.INFORMASI_PEMBAWA_PEKERJAAN_USER_CLIENT) ||
+                    (informasiPembawaPekerjaan === Constants.INFORMASI_PEMBAWA_PEKERJAAN_MANAJEMEN_LAPI)
+                  ) ? (
+                    <div>
+                      {
+                        (usulanTimSatu.id) ? (<div></div>) : (
+                          <div>
+                            <br />
+                            { 
+                              addUsulanTimSatuFormVisibility ? 
+                                (
+                                  <div>
+                                    <AddTimForm
+                                      kkList={kkList}
+                                      usulan={true}
+                                      namaKetuaTim={namaKetuaUsulanTimSatu}
+                                      setNamaKetuaTim={this.setNamaKetuaUsulanTimSatu}
+                                      namaPMTim={namaPMUsulanTimSatu}
+                                      setNamaPMTim={this.setNamaPMUsulanTimSatu}
+                                      emailTim={emailUsulanTimSatu}
+                                      setEmailTim={this.setEmailUsulanTimSatu}
+                                      selectedKelompokKeahlianTim={selectedKelompokKeahlianUsulanTimSatu}
+                                      setSelectedKelompokKeahlianTim={this.setSelectedKelompokKeahlianUsulanTimSatu}
+                                      isWide={true}
+                                    />
+                                    <br />
+                                    <Grid item container alignItems="flex-start" spacing={2}>
+                                      <Grid item><OutlinedButton onClick={this.toggleAddUsulanTimSatuForm} style={{padding: '0 .7em'}}>Batal Tambah</OutlinedButton></Grid>
+                                      <Grid item><Button onClick={() => this.createAndSelectUsulanTim(1, {
+                                        nama_ketua: namaKetuaUsulanTimSatu,
+                                        nama_pm: namaPMUsulanTimSatu,
+                                        kk: selectedKelompokKeahlianUsulanTimSatu,
+                                        email: emailUsulanTimSatu,
+                                      })} style={{padding: '0 .7em'}}>Tambah Usulan Tim 1</Button></Grid>
+                                    </Grid>
+                                  </div>
+                                )
+                              : (
+                                <div>
+                                  <Grid item container alignItems="center" justify="space-between" spacing={2}>
+                                    <Grid item md={4}>Usulan Tim 1</Grid>
+                                    <Grid item md={8}>
+                                      {addUsulanTimSatuFormVisibility ? '' : (
+                                        <Autocomplete
+                                          options={timList}
+                                          getOptionLabel={option => `Ketua ${option.nama_ketua} - KK ${kkList.filter(el => el.id===option.kelompok_keahlian)[0].nama} - PM ${option.nama_pm}`}
+                                          renderInput={params => (
+                                            <TextField {...params} label="Usulan Tim 1" variant="outlined" fullWidth />
+                                          )}
+                                          onChange={(event, values) => values ? this.setSelectedUsulanTimSatu(values.id) : false}
+                                        />
+                                      )}
+                                    </Grid>
+                                  </Grid>
+                                  <br />
+                                  <Grid item container alignItems="flex-start" spacing={2}>
+                                    <Grid item><OutlinedButton onClick={this.toggleAddUsulanTimSatuForm} style={{padding: '0 .7em'}}>Tambah Usulan Tim 1</OutlinedButton></Grid>
+                                    <Grid item><Button onClick={() => this.selectUsulanTim(1, selectedUsulanTimSatu)} style={{padding: '0 .7em'}}>Pilih Usulan Tim 1`</Button></Grid>
+                                  </Grid>
+                                </div>
+                              )}
+                          </div>
+                        )
+                      }
+                      {
+                        (usulanTimDua.id) ? (<div></div>) : (
+                          <div>
+                            <br />
+                            <Divider />
+                            <br />
+                            { 
+                              addUsulanTimDuaFormVisibility ? 
+                                (
+                                  <div>
+                                    <AddTimForm
+                                      kkList={kkList}
+                                      usulan={true}
+                                      namaKetuaTim={namaKetuaUsulanTimDua}
+                                      setNamaKetuaTim={this.setNamaKetuaUsulanTimDua}
+                                      namaPMTim={namaPMUsulanTimDua}
+                                      setNamaPMTim={this.setNamaPMUsulanTimDua}
+                                      emailTim={emailUsulanTimDua}
+                                      setEmailTim={this.setEmailUsulanTimDua}
+                                      selectedKelompokKeahlianTim={selectedKelompokKeahlianUsulanTimDua}
+                                      setSelectedKelompokKeahlianTim={this.setSelectedKelompokKeahlianUsulanTimDua}
+                                      isWide={true}
+                                    />
+                                    <br />
+                                    <Grid item container alignItems="flex-start" spacing={2}>
+                                      <Grid item><OutlinedButton onClick={this.toggleAddUsulanTimDuaForm} style={{padding: '0 .7em'}}>Batal Tambah</OutlinedButton></Grid>
+                                      <Grid item><Button onClick={() => this.createAndSelectUsulanTim(2, {
+                                        nama_ketua: namaKetuaUsulanTimDua,
+                                        nama_pm: namaPMUsulanTimDua,
+                                        kk: selectedKelompokKeahlianUsulanTimDua,
+                                        email: emailUsulanTimDua,
+                                      })} style={{padding: '0 .7em'}}>Tambah Usulan Tim 2</Button></Grid>
+                                    </Grid>
+                                  </div>
+                                )
+                              : (
+                                <div>
+                                  <Grid item container alignItems="center" justify="space-between" spacing={2}>
+                                    <Grid item md={4}>Usulan Tim 2</Grid>
+                                    <Grid item md={8}>
+                                      <Autocomplete
+                                        options={timList}
+                                        getOptionLabel={option => `Ketua ${option.nama_ketua} - KK ${kkList.filter(el => el.id===option.kelompok_keahlian)[0].nama} - PM ${option.nama_pm}`}
+                                        renderInput={params => (
+                                          <TextField {...params} label="Usulan Tim 2" variant="outlined" fullWidth />
+                                        )}
+                                        onChange={(event, values) => values ? this.setSelectedUsulanTimDua(values.id) : false}
+                                      />
+                                    </Grid>
+                                  </Grid>
+                                  <br />
+                                  <Grid item container alignItems="flex-start" spacing={2}>
+                                    <Grid item><OutlinedButton onClick={this.toggleAddUsulanTimDuaForm} style={{padding: '0 .7em'}}>{ addUsulanTimDuaFormVisibility ? `Batal Tambah Usulan Tim 2` : `Tambah Usulan Tim 2`}</OutlinedButton></Grid>
+                                    <Grid item><Button onClick={() => this.selectUsulanTim(2, selectedUsulanTimDua)} style={{padding: '0 .7em'}}>Pilih Usulan Tim 2</Button></Grid>
+                                  </Grid>
+                                </div>
+                              )}
+                          </div>
+                        )
+                      }
+                    </div>
+                  ) : (
+                    (timTerpilih.id) ? (<div></div>) : (
+                      <div>
+                        <br />
+                        <Divider />
+                        <br />
+                        { 
+                          addTimTerpilihFormVisibility ? 
+                            (
+                              <div>
+                                <AddTimForm
+                                  kkList={kkList}
+                                  usulan={true}
+                                  namaKetuaTim={namaKetuaTimTerpilih}
+                                  setNamaKetuaTim={this.setNamaKetuaTimTerpilih}
+                                  namaPMTim={namaPMTimTerpilih}
+                                  setNamaPMTim={this.setNamaPMTimTerpilih}
+                                  emailTim={emailTimTerpilih}
+                                  setEmailTim={this.setEmailTimTerpilih}
+                                  selectedKelompokKeahlianTim={selectedKelompokKeahlianTimTerpilih}
+                                  setSelectedKelompokKeahlianTim={this.setSelectedKelompokKeahlianTimTerpilih}
+                                  isWide={true}
+                                />
+                                <br />
+                                <Grid item container alignItems="flex-start" spacing={2}>
+                                  <Grid item><OutlinedButton onClick={this.toggleAddTimTerpilihForm} style={{padding: '0 .7em'}}>Batal Tambah</OutlinedButton></Grid>
+                                  <Grid item><Button onClick={() => this.createAndSelectUsulanTim(0, {
+                                        nama_ketua: namaKetuaTimTerpilih,
+                                        nama_pm: namaPMTimTerpilih,
+                                        kk: selectedKelompokKeahlianTimTerpilih,
+                                        email: emailTimTerpilih,
+                                      })} style={{padding: '0 .7em'}}>Tambah Tim Pelaksana</Button></Grid>
+                                </Grid>
+                              </div>
+                            )
+                          : (
+                            <div>
+                              <Grid item container alignItems="center" justify="space-between" spacing={2}>
+                                <Grid item md={4}>Tim Terpilih</Grid>
+                                <Grid item md={8}>
+                                  <Autocomplete
+                                    options={timList}
+                                    getOptionLabel={option => `Ketua ${option.nama_ketua} - KK ${kkList.filter(el => el.id===option.kelompok_keahlian)[0].nama} - PM ${option.nama_pm}`}
+                                    renderInput={params => (
+                                      <TextField {...params} label="Tim Terpilih" variant="outlined" fullWidth />
+                                    )}
+                                    onChange={(event, values) => values ? this.setSelectedTimTerpilih(values.id) : false}
+                                  />
+                                </Grid>
+                              </Grid>
+                              <br />
+                              <Grid item container alignItems="flex-start" spacing={2}>
+                                <Grid item><OutlinedButton onClick={this.toggleAddTimTerpilihForm} style={{padding: '0 .7em'}}>{ addTimTerpilihFormVisibility ? `Batal Tambah Tim Terpilih` : `Tambah Tim Terpilih`}</OutlinedButton></Grid>
+                                <Grid item><Button onClick={() => this.selectUsulanTim(0, selectedTimTerpilih)} style={{padding: '0 .7em'}}>Pilih Tim Terpilih</Button></Grid>
+                              </Grid>
+                            </div>
+                          )}
+                      </div>
+                    )
+                  )
+                }
                 <Grid container justify="flex-end" alignItems="center">
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 .5em'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(
+                    (Authorization.getRole() === 7) &&
+                    peluang &&
+                    (peluang.status === 1) &&
+                    (
+                      timTerpilih.id ||
+                      usulanTimSatu.id ||
+                      usulanTimDua.id
+                    )
+                  ) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 .5em'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
             </Grid>  
