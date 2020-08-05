@@ -17,7 +17,7 @@ import Popper from '@material-ui/core/Popper'
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state'
 import Fade from '@material-ui/core/Fade'
 
-import {routesSuperUser, routesPM, routesMK3L, routesKeuangan, routesProfile} from '../../Shared/Config'
+import {routesSuperUser, routesDireksi, routesPM, routesMK3L, routesKeuangan, routesProfile} from '../../Shared/Config'
 import APIBuilder from '../../Shared/APIBuilder'
 import Constants from '../../Shared/Constants'
 
@@ -88,8 +88,10 @@ function Navbar({email, role, title}){
       switch(role) {
         case Constants.ROLE_SUPER_USER:
           return route(routesSuperUser)
+        case Constants.ROLE_CEO:
+          return route(routesDireksi)
         case Constants.ROLE_COO:
-          return route(routesPM)
+          return route(routesDireksi)
         case Constants.ROLE_MK3L:
           return route(routesMK3L)
         case Constants.ROLE_PM:
@@ -131,13 +133,13 @@ function Navbar({email, role, title}){
                 <div>
                   <IconButton {...bindToggle(popupState)}>
                     <img src={notification} alt="notification-icon" style={iconStyle}/>
-                    {(notificationList.filter((e) => e.is_read === 0)).length}
+                    {notificationList ? (notificationList.filter((e) => e.is_read === 0)).length : 0}
                   </IconButton>
                   <Popper {...bindPopper(popupState)} transition>
                     {({ TransitionProps }) => (
                       <Fade {...TransitionProps} timeout={350}>
                         <Paper style={{maxHeight:'100px', overflowY:'scroll'}}>
-                          {notificationList.map((e) => {
+                          {notificationList ? notificationList.map((e) => {
                             if (e.is_read) {
                               return (<div key={`${e.id}${e.proyek_id}`}>
                                 <NotificationButtonRead onClick={() => {history.push(`/proyek/${e.proyek_id}`)}}>
@@ -155,7 +157,7 @@ function Navbar({email, role, title}){
                                 <Divider />
                               </div>)
                             }
-                          })}
+                          }) : (<div />)}
                         </Paper>
                       </Fade>
                     )}
