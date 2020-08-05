@@ -27,6 +27,7 @@ import TerminProyekScreen from './Components/Screens/TerminProyek/TerminProyek'
 import LaporanPPBJScreen from './Components/Screens/LaporanPerforma/LaporanPPBJ/LaporanPPBJ'
 import LaporanPPBJNilaiKontrakScreen from './Components/Screens/LaporanPerforma/LaporanPPBJ/LaporanPPBJNilaiKontrak'
 import LaporanPerformaScreen from './Components/Screens/LaporanPerforma/LaporanPerforma'
+import GrafikNilaiKontrakScreen from './Components/Screens/LaporanPerforma/GrafikNilaiKontrak'
 
 class App extends React.Component {
   render() {
@@ -63,6 +64,7 @@ class App extends React.Component {
           <Route path="/laporan-performa" exact component={LaporanPerformaScreen} />
           <Route path="/laporan-ppbj" exact component={LaporanPPBJScreen} />
           <Route path="/laporan-ppbj-nilai-kontrak" exact component={LaporanPPBJNilaiKontrakScreen} />
+          <Route path="/laporan-grafik" exact component={GrafikNilaiKontrakScreen} />
         </Grid>
       </Router>
     );
