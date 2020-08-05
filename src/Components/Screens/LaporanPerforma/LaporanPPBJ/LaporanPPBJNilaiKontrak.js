@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Grid, Paper, Typography, TextField} from '@material-ui/core'
+import {Grid, Paper, Typography} from '@material-ui/core'
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
 import * as moment from 'moment'
@@ -22,7 +22,6 @@ function LaporanPPBJNilaiKontrak() {
     }
     
     let response = await APIBuilder('proyek/amount-by-year', payload, 'POST')
-    console.log(response)
     if (response.code === 200) setAmountByYear(response.payload.data)
   }
 
