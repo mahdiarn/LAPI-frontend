@@ -57,7 +57,7 @@ function LaporanPPBJ() {
                   &nbsp;
                 </Grid>
                 <Grid item>
-                  <Button style={{padding: '0 .7em'}} onClick={() => history.push('/laporan-ppbk-nilai-kontrak')}>Perolehan Nilai Kontrak</Button>
+                  <Button style={{padding: '0 .7em'}} onClick={() => history.push('/laporan-ppbj-nilai-kontrak')}>Perolehan Nilai Kontrak</Button>
                 </Grid>
               </Grid>
               <Grid item container>
