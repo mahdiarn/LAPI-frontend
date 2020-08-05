@@ -24,6 +24,9 @@ import DaftarPenagihanInvoice from './Components/Screens/DaftarPenagihanInvoice/
 import DaftarPembayaranSPPU from './Components/Screens/DaftarPembayaranSPPU/DaftarPembayaranSPPU'
 import InformasiProyekScreen from './Components/Screens/InformasiProyek/InformasiProyek'
 import TerminProyekScreen from './Components/Screens/TerminProyek/TerminProyek'
+import LaporanPPBJScreen from './Components/Screens/LaporanPerforma/LaporanPPBJ/LaporanPPBJ'
+import LaporanPPBJNilaiKontrakScreen from './Components/Screens/LaporanPerforma/LaporanPPBJ/LaporanPPBJNilaiKontrak'
+import LaporanPerformaScreen from './Components/Screens/LaporanPerforma/LaporanPerforma'
 
 class App extends React.Component {
   render() {
@@ -57,6 +60,9 @@ class App extends React.Component {
           <Route path="/permintaan-invoice" exact component={DaftarPermohonanPenagihanInvoice} />
           <Route path="/pembayaran-invoice" exact component={DaftarPenagihanInvoice} />
           <Route path="/pembayaran-sppu" exact component={DaftarPembayaranSPPU} />
+          <Route path="/laporan-performa" exact component={LaporanPerformaScreen} />
+          <Route path="/laporan-ppbj" exact component={LaporanPPBJScreen} />
+          <Route path="/laporan-ppbj-nilai-kontrak" exact component={LaporanPPBJNilaiKontrakScreen} />
         </Grid>
       </Router>
     );
