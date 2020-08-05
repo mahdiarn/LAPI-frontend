@@ -48,7 +48,7 @@ function LaporanPerforma() {
               </Grid>
               <Grid item container alignItems="center" justify="center">
                 <Grid item>
-                  <Button style={{padding: '0 .7em'}} onClick={() => history.push('/laporan-grafik')}>Proyeksi Nilai Kontrak</Button>
+                  <Button style={{padding: '0 .7em'}} onClick={() => history.push('/laporan-grafik')}>Grafik Nilai Kontrak</Button>
                 </Grid>
               </Grid>
             </Grid>
