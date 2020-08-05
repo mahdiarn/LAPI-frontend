@@ -146,3 +146,18 @@ export const daftarPembayaranSPPUColumn = [
   { id: 'status', label: 'Status', minWidth: 70 , align: 'center' },
   { id: 'menu', label: 'Menu', minWidth: 70 , align: 'center' }
 ]
+
+export const daftarPMColumns = [
+  { id: 'id', label: 'Kode', minWidth: 25 },
+  { id: 'nama_lengkap', label: 'Keterangan', minWidth: 50 }
+]
+
+export const daftarPMSummaryColumns = [
+  { id: 'id', label: 'Kode', minWidth: 25 },
+  { id: 'nama_lengkap', label: 'MP', minWidth: 50 },
+  { id: 'pendaftaran_count', label: 'Pendaftaran', minWidth: 50 },
+  { id: 'prakualifikasi_count', label: 'Prakualifikasi', minWidth: 50 },
+  { id: 'proposal_count', label: 'Proposal', minWidth: 50 },
+  { id: 'negosiasi_count', label: 'Negosiasi', minWidth: 50 },
+  { id: 'total', label: 'Total', minWidth: 50 },
+]
