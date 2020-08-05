@@ -161,3 +161,10 @@ export const daftarPMSummaryColumns = [
   { id: 'negosiasi_count', label: 'Negosiasi', minWidth: 50 },
   { id: 'total', label: 'Total', minWidth: 50 },
 ]
+
+export const daftarNilaiProyekPerTahun = [
+  { id: 'no', label: 'No', minWidth: 25 },
+  { id: 'bulan', label: 'Bulan', minWidth: 50 },
+  { id: 'total_nilai_proyek', label: 'Nilai Pencapaian', minWidth: 50 },
+  { id: 'total_proyek', label: 'Jumlah Proyek', minWidth: 50, align: 'center' },
+]
