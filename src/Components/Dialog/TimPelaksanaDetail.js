@@ -180,7 +180,7 @@ function TimPelaksanaDetail(props) {
                         } else if (column.id === 'keahlian') {
                           return (
                             <TableCell key={column.id+value} align={column.align}>
-                              {kkList ? kkList.filter(el => el.id===value)[0].nama : ''}
+                              {(kkList && kkList.filter(el => el.id===value).length > 0) ? kkList.filter(el => el.id===value)[0].nama : ''}
                             </TableCell>
                           )
                         } else if (column.id === 'is_asing') {

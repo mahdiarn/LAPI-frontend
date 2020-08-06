@@ -1,6 +1,11 @@
 import Constants from './Constants'
 
 export default []
+export const routesDireksi = [
+  {name: 'Daftar Peluang', url: '/daftar-peluang'},
+  {name: 'Daftar Proyek', url: '/daftar-proyek'},
+  {name: 'Laporan Performa', url: '/laporan-performa'},
+]
 export const routesPM = [
   {name: 'Daftar Peluang', url: '/daftar-peluang'},
   {name: 'Daftar Proyek', url: '/daftar-proyek'},

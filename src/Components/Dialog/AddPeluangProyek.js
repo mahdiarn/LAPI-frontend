@@ -25,32 +25,32 @@ function AddPeluangProyek(props) {
   const [addPemberiKerjaFormVisibility, setAddPemberiKerjaFormVisibility] = useState(false)
   const [namaPemberiKerja, setNamaPemberiKerja] = useState('')
   const [alamatPemberiKerja, setAlamatPemberiKerja] = useState('')
-  const [selectedJenisPemberiKerja, setSelectedJenisPemberiKerja] = useState(1)
+  const [selectedJenisPemberiKerja, setSelectedJenisPemberiKerja] = useState(0)
 
-  const [selectedKlasifikasiProyek, setSelectedKlasifikasiProyek] = useState(1)
-  const [selectedProsesPengadaan, setSelectedProsesPengadaan] = useState(1)
-  const [selectedInformasiPembawaPekerjaan, setSelectedInformasiPembawaPekerjaan] = useState(1)
+  const [selectedKlasifikasiProyek, setSelectedKlasifikasiProyek] = useState(0)
+  const [selectedProsesPengadaan, setSelectedProsesPengadaan] = useState(0)
+  const [selectedInformasiPembawaPekerjaan, setSelectedInformasiPembawaPekerjaan] = useState(0)
 
   const [selectedTim, setSelectedTim] = useState(0)
   const [addTimFormVisibility, setAddTimFormVisibility] = useState(false)
   const [namaKetuaTim, setNamaKetuaTim] = useState('')
   const [namaPMTim, setNamaPMTim] = useState('')
   const [emailTim, setEmailTim] = useState('')
-  const [selectedKelompokKeahlianTim, setSelectedKelompokKeahlianTim] = useState(1)
+  const [selectedKelompokKeahlianTim, setSelectedKelompokKeahlianTim] = useState(0)
 
   const [selectedUsulanTimSatu, setSelectedUsulanTimSatu] = useState(0)
   const [addUsulanTimSatuFormVisibility, setAddUsulanTimSatuFormVisibility] = useState(false)
   const [namaKetuaUsulanTimSatu, setNamaKetuaUsulanTimSatu] = useState('')
   const [namaPMUsulanTimSatu, setNamaPMUsulanTimSatu] = useState('')
   const [emailUsulanTimSatu, setEmailUsulanTimSatu] = useState('')
-  const [selectedKelompokKeahlianUsulanTimSatu, setSelectedKelompokKeahlianUsulanTimSatu] = useState(1)
+  const [selectedKelompokKeahlianUsulanTimSatu, setSelectedKelompokKeahlianUsulanTimSatu] = useState(0)
 
   const [selectedUsulanTimDua, setSelectedUsulanTimDua] = useState(0)
   const [addUsulanTimDuaFormVisibility, setAddUsulanTimDuaFormVisibility] = useState(false)
   const [namaKetuaUsulanTimDua, setNamaKetuaUsulanTimDua] = useState('')
   const [namaPMUsulanTimDua, setNamaPMUsulanTimDua] = useState('')
   const [emailUsulanTimDua, setEmailUsulanTimDua] = useState('')
-  const [selectedKelompokKeahlianUsulanTimDua, setSelectedKelompokKeahlianUsulanTimDua] = useState(1)
+  const [selectedKelompokKeahlianUsulanTimDua, setSelectedKelompokKeahlianUsulanTimDua] = useState(0)
   useEffect(() => {
     async function getPemberiKerjaList() {
       const response = await APIBuilder('pemberi-kerja')
@@ -110,13 +110,17 @@ function AddPeluangProyek(props) {
       nama_ketua_usulan_tim_dua: namaKetuaUsulanTimDua,
       kelompok_keahlian_usulan_tim_dua: selectedKelompokKeahlianUsulanTimDua,
       nama_pm_usulan_tim_dua: namaPMUsulanTimDua,
-      email_usulan_tim_dua: emailUsulanTimDua
+      email_usulan_tim_dua: emailUsulanTimDua,
+      is_add_pemberi_kerja: addPemberiKerjaFormVisibility,
+      is_add_tim: addTimFormVisibility,
+      is_add_usulan_tim_satu: addUsulanTimSatuFormVisibility,
+      is_add_usulan_tim_dua: addUsulanTimDuaFormVisibility,
     }
 
     const response = await APIBuilder('peluang-proyek', payload, 'POST')
     if (response.code !== 200){
-      alert('Pembuatan Proyek Gagal!')
-      return
+      alert('Pembuatan Proyek Gagal! ' + response.payload.data)
+      return setProgressVisibility(false)
     }
 
     if (response.code === 200) {
