@@ -168,3 +168,10 @@ export const daftarNilaiProyekPerTahun = [
   { id: 'total_nilai_proyek', label: 'Nilai Pencapaian', minWidth: 50 },
   { id: 'total_proyek', label: 'Jumlah Proyek', minWidth: 50, align: 'center' },
 ]
+
+export const daftarLaporanProyekPerTahun = [
+  { id: 'no', label: 'No', minWidth: 25 },
+  { id: 'name', label: 'Uraian', minWidth: 50 },
+  { id: 'total_proyek', label: 'Jumlah Proyek', minWidth: 50, align: 'center' },
+  { id: 'total_nilai_proyek', label: 'Nilai Pencapaian', minWidth: 50 },
+]

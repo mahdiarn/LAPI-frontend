@@ -28,6 +28,9 @@ import LaporanPPBJScreen from './Components/Screens/LaporanPerforma/LaporanPPBJ/
 import LaporanPPBJNilaiKontrakScreen from './Components/Screens/LaporanPerforma/LaporanPPBJ/LaporanPPBJNilaiKontrak'
 import LaporanPerformaScreen from './Components/Screens/LaporanPerforma/LaporanPerforma'
 import GrafikNilaiKontrakScreen from './Components/Screens/LaporanPerforma/GrafikNilaiKontrak'
+import LaporanRangkumanProyekTahunanScreen from './Components/Screens/LaporanPerforma/LaporanPascaKontrak/LaporanRangkumanProyekTahunan'
+import LaporanRangkumanProyekBulananScreen from './Components/Screens/LaporanPerforma/LaporanPascaKontrak/LaporanRangkumanProyekBulanan'
+import LaporanRangkumanProyekKategoriLainScreen from './Components/Screens/LaporanPerforma/LaporanPascaKontrak/LaporanRangkumanProyekKategoriLain'
 
 class App extends React.Component {
   render() {
@@ -65,6 +68,9 @@ class App extends React.Component {
           <Route path="/laporan-ppbj" exact component={LaporanPPBJScreen} />
           <Route path="/laporan-ppbj-nilai-kontrak" exact component={LaporanPPBJNilaiKontrakScreen} />
           <Route path="/laporan-grafik" exact component={GrafikNilaiKontrakScreen} />
+          <Route path="/laporan-pasca-kontrak" exact component={LaporanRangkumanProyekTahunanScreen} />
+          <Route path="/laporan-pasca-kontrak-per-bulan" exact component={LaporanRangkumanProyekBulananScreen} />
+          <Route path="/laporan-pasca-kontrak-per-kategori-lain" exact component={LaporanRangkumanProyekKategoriLainScreen} />
         </Grid>
       </Router>
     );
