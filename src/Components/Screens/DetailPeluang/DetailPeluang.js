@@ -574,6 +574,17 @@ class DetailPeluang extends React.Component {
     }
   }
 
+  authorizedToEditPeluang(role) {
+    switch (role) {
+      case Constants.ROLE_PM:
+      case Constants.ROLE_PC:
+      case Constants.ROLE_PA:
+        return true;
+      default:
+        return false
+    }
+  }
+
   render() {
     const {uploadWindow, peluangName, uploadCvTimId} = this.state
     const {id} = this.props.match.params
@@ -826,7 +837,7 @@ class DetailPeluang extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.toggleDetailEditMode} style={{padding: '0 .5em'}}>{editDetailMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(this.authorizedToEditPeluang(Authorization.getRole()) && peluang && peluang.status === 1) ? (<Button onClick={this.toggleDetailEditMode} style={{padding: '0 .5em'}}>{editDetailMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -894,7 +905,7 @@ class DetailPeluang extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && peluang && peluang.status === 1) ? (<Button onClick={this.togglePemberiKerjaEditMode} style={{padding: '0 .5em'}}>{editPemberiKerjaMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(this.authorizedToEditPeluang(Authorization.getRole()) && peluang && peluang.status === 1) ? (<Button onClick={this.togglePemberiKerjaEditMode} style={{padding: '0 .5em'}}>{editPemberiKerjaMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -1386,7 +1397,7 @@ class DetailPeluang extends React.Component {
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
                   <Grid item>{(
-                    (Authorization.getRole() === 7) &&
+                    this.authorizedToEditPeluang(Authorization.getRole()) &&
                     peluang &&
                     (peluang.status === 1) &&
                     (

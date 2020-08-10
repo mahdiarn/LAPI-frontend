@@ -162,6 +162,17 @@ class DaftarPeluang extends React.Component {
     }
   }
 
+  authorizedToAddPeluang(role) {
+    switch (role) {
+      case Constants.ROLE_PM:
+      case Constants.ROLE_PC:
+      case Constants.ROLE_PA:
+        return true;
+      default:
+        return false
+    }
+  }
+
   handleToggleAddPeluangWindow = async (event) => {
     const { addPeluangWindow } = this.state
     const response = await APIBuilder('peluang-proyek')
@@ -314,7 +325,7 @@ class DaftarPeluang extends React.Component {
                 </FormControl>
               </Grid>
               <Grid item container justify="flex-end" md={3} style={{ padding: '15px'}}>
-                {(Authorization.getRole() === 7) ? (
+                {this.authorizedToAddPeluang(Authorization.getRole()) ? (
                   <Button style={{padding: '0em 1em', height: '2em'}} onClick={this.handleToggleAddPeluangWindow}><AddIcon></AddIcon> Tambah Peluang</Button>
                 ) : (
                   <div />
