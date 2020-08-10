@@ -628,6 +628,17 @@ class DetailProyek extends React.Component {
     }
   }
 
+  authorizedToEditProyek(role) {
+    switch (role) {
+      case Constants.ROLE_PM:
+      case Constants.ROLE_PC:
+      case Constants.ROLE_PA:
+        return true;
+      default:
+        return false
+    }
+  }
+
   render() {
     const {proyekName} = this.state
     const {pemberiKerjaDetailWindow, timPelaksanaDetailWindow, prefinancingDetailWindow} = this.state
@@ -849,7 +860,7 @@ class DetailProyek extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 4) ? (<Button onClick={this.toggleDetailEditMode} style={{padding: '0 0'}}>{editDetailMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(this.authorizedToEditProyek(Authorization.getRole()) && proyek && proyek.status === 4) ? (<Button onClick={this.toggleDetailEditMode} style={{padding: '0 0'}}>{editDetailMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -1029,7 +1040,7 @@ class DetailProyek extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.togglePemberiKerjaEditMode} style={{padding: '0 0'}}>{editPemberiKerjaMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(this.authorizedToEditProyek(Authorization.getRole()) && proyek && proyek.status === 1) ? (<Button onClick={this.togglePemberiKerjaEditMode} style={{padding: '0 0'}}>{editPemberiKerjaMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -1157,7 +1168,7 @@ class DetailProyek extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 0'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(this.authorizedToEditProyek(Authorization.getRole()) && proyek && proyek.status === 1) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 0'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
               &nbsp;
@@ -1275,7 +1286,7 @@ class DetailProyek extends React.Component {
                   &nbsp;
                 </Grid>
                 <Grid container justify="flex-end" alignItems="center">
-                  <Grid item>{(Authorization.getRole() === 7 && proyek && proyek.status === 1) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 0'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                  <Grid item>{(this.authorizedToEditProyek(Authorization.getRole()) && proyek && proyek.status === 1) ? (<Button onClick={this.toggleTimEditMode} style={{padding: '0 0'}}>{editTimMode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                 </Grid>
               </Paper>
             </Grid>  
