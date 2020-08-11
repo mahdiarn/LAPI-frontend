@@ -93,6 +93,7 @@ function Navbar({email, role, title}){
         case Constants.ROLE_COO:
           return route(routesDireksi)
         case Constants.ROLE_MK3L:
+        case Constants.ROLE_PU:
           return route(routesMK3L)
         case Constants.ROLE_PM:
         case Constants.ROLE_PC:
