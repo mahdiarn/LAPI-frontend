@@ -93,8 +93,8 @@ function LaporanRangkumanProyekTahunan() {
                 &nbsp;
               </Grid>
               <Grid item container alignItems="center" justify="center">
-                <Grid item md={6} sm={12}>
-                  <ReportProyekPerYear amountPerYearList={[]}  year={year}/>
+                <Grid item md={8} sm={12}>
+                  <ReportProyekPerYear  year={year}/>
                 </Grid>
               </Grid>
             </Grid>
