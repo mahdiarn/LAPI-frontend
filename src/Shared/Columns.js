@@ -175,3 +175,11 @@ export const daftarLaporanProyekPerTahun = [
   { id: 'total_proyek', label: 'Jumlah Proyek', minWidth: 50, align: 'center' },
   { id: 'total_nilai_proyek', label: 'Nilai Pencapaian', minWidth: 50 },
 ]
+
+export const daftarLaporanJenisPengadaanPerTahun = [
+  { id: '', label: '', minWidth: 0 },
+  { id: 'pengadaan', label: 'Pengadaan', minWidth: 25 },
+  { id: 'nama_pengadaan', label: 'Uraian', minWidth: 50 },
+  { id: 'total_proyek', label: 'Jumlah Proyek', minWidth: 50, align: 'center' },
+  { id: 'total_nilai_proyek', label: 'Nilai Pencapaian', minWidth: 50 },
+]
