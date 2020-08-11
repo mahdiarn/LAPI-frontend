@@ -639,6 +639,16 @@ class DetailProyek extends React.Component {
     }
   }
 
+  authorizedToEditSP3(role) {
+    switch (role) {
+      case Constants.ROLE_MK3L:
+      case Constants.ROLE_PU:
+        return true;
+      default:
+        return false
+    }
+  }
+
   render() {
     const {proyekName} = this.state
     const {pemberiKerjaDetailWindow, timPelaksanaDetailWindow, prefinancingDetailWindow} = this.state
@@ -865,7 +875,7 @@ class DetailProyek extends React.Component {
               </Paper>
               &nbsp;
               <Paper style={{width: '100%', padding: '1em 1.5em'}}>
-                {((Authorization.getRole() === Constants.ROLE_MK3L) && (proyek && proyek.status !== Constants.PROYEK_STATUS_END)) ? (
+                {(this.authorizedToEditSP3(Authorization.getRole()) && (proyek && proyek.status !== Constants.PROYEK_STATUS_END)) ? (
                   <Grid container justify="flex-end" alignItems="center">
                     <Grid item container md={6} justify="flex-end">
                       <Link to={this.props.location.pathname} onClick={() => {this.handleToggleCetakSP3()}}>{cetakSP3Mode ? `Informasi Kontrak & SP3` : `Cetak SP3`}</Link>
@@ -930,7 +940,7 @@ class DetailProyek extends React.Component {
                       </Typography></Grid>
                     </Grid>
                     <Grid container justify="flex-end" alignItems="center">
-                      <Grid item>{(Authorization.getRole() === 5 && proyek && proyek.status === 4) ? (<Button onClick={this.toggleKontrakSP3EditMode} style={{padding: '0 0'}}>{editKontrakSP3Mode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
+                      <Grid item>{(this.authorizedToEditSP3(Authorization.getRole()) && proyek && proyek.status === 4) ? (<Button onClick={this.toggleKontrakSP3EditMode} style={{padding: '0 0'}}>{editKontrakSP3Mode ? 'Simpan' : 'Edit'}</Button>) : (<div></div>)}</Grid>
                     </Grid>
                     <br />
                   </div>
@@ -975,11 +985,11 @@ class DetailProyek extends React.Component {
                     </Grid>
                     <br />
                     <Grid container justify="flex-end" alignItems="center">
-                      <Grid item>{(Authorization.getRole() === Constants.ROLE_MK3L && proyek && proyek.status === 4) ? (<Button onClick={this.generateSP3}>{'Cetak SP3'}</Button>) : (<div></div>)}</Grid>
+                      <Grid item>{(this.authorizedToEditSP3(Authorization.getRole()) && proyek && proyek.status === 4) ? (<Button onClick={this.generateSP3}>{'Cetak SP3'}</Button>) : (<div></div>)}</Grid>
                     </Grid>
                     <br />
                     <Grid container justify="flex-end" alignItems="center">
-                      <Grid item>{(Authorization.getRole() === Constants.ROLE_MK3L && proyek && proyek.status === 4) ? (<Button onClick={this.generateSP3SLF}>{'Cetak SP3 (Draft SLF)'}</Button>) : (<div></div>)}</Grid>
+                      <Grid item>{(this.authorizedToEditSP3(Authorization.getRole()) && proyek && proyek.status === 4) ? (<Button onClick={this.generateSP3SLF}>{'Cetak SP3 (Draft SLF)'}</Button>) : (<div></div>)}</Grid>
                     </Grid>
                     <br />
                   </div>

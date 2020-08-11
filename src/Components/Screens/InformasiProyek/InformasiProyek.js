@@ -163,6 +163,16 @@ class InformasiProyek extends React.Component {
     }
   }
 
+  authorizedToAdvanceOrEndProject(role) {
+    switch (role) {
+      case Constants.ROLE_MK3L:
+      case Constants.ROLE_PU:
+        return true;
+      default:
+        return false
+    }
+  }
+
   render() {
     const {logPage, rowsPerLogPage, logListView, addLogWindow, fileWindow, endProyekWindow} = this.state
     const {filePage, rowsPerFilePage, fileListView} = this.state
@@ -185,7 +195,7 @@ class InformasiProyek extends React.Component {
         <Grid item container justify="center" alignItems="center" style={{ marginTop: '4em', padding: '0 1em'}} spacing={2}>
           <Typography variant="h4" style={{color: (status === Constants.PROYEK_STATUS_END) ? '#AB0000' : '#117C9B'}}>{`P${pins} - ${proyekName} ${(status === Constants.PROYEK_STATUS_END) ? '(Berakhir)' : ''}`}</Typography>
         </Grid>
-        {((Authorization.getRole() === 5) && (status !== Constants.PROYEK_STATUS_END)) ? (
+        {(this.authorizedToAdvanceOrEndProject(Authorization.getRole()) && (status !== Constants.PROYEK_STATUS_END)) ? (
           <Grid item container justify="flex-end" alignItems="center" style={{ marginTop: '4em', padding: '0 1em'}} spacing={2}>
             {(status === Constants.PROYEK_STATUS_PENGADAAN) ? (
               <Grid item>
