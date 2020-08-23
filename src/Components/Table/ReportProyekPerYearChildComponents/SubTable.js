@@ -4,8 +4,8 @@ import { TableBody, TableRow, TableCell } from '@material-ui/core'
 
 import {RomawiFormat, RupiahFormat} from '../../../Shared/TextTransformer'
 import APIBuilder from '../../../Shared/APIBuilder'
-import {daftarLaporanJenisPengadaanPerTahun, daftarLaporanJenisPemberiKerjaPerTahun} from '../../../Shared/Columns'
-import {CodeToJenisPengadaan, CodeToJenisPemberiKerja} from '../../../Shared/CodeToName'
+import {daftarLaporanJenisPengadaanPerTahun, daftarLaporanJenisPemberiKerjaPerTahun, daftarLaporanKlasifikasiProyekPerTahun} from '../../../Shared/Columns'
+import {CodeToJenisPengadaan, CodeToJenisPemberiKerja, CodeToKlasifikasiProyek} from '../../../Shared/CodeToName'
 
 function SubTable(props) {
   const [data, setData] = useState([])
@@ -17,6 +17,8 @@ function SubTable(props) {
         return setColumns(daftarLaporanJenisPengadaanPerTahun)
       case 'jenis_pemberi_kerja':
         return setColumns(daftarLaporanJenisPemberiKerjaPerTahun)
+      case 'klasifikasi_proyek':
+        return setColumns(daftarLaporanKlasifikasiProyekPerTahun)
       default:
         return setColumns([])
     }
@@ -45,6 +47,8 @@ function SubTable(props) {
         return CodeToJenisPengadaan(row['pengadaan'])
       case 'nama_jenis_pemberi_kerja':
         return CodeToJenisPemberiKerja(row['jenis_pemberi_kerja'])
+      case 'nama_klasifikasi_proyek':
+        return CodeToKlasifikasiProyek(row['klasifikasi_proyek'])
       case 'total_nilai_proyek':
         return RupiahFormat(value)
       default:
