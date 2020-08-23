@@ -16,4 +16,21 @@ export const CodeToJenisPengadaan = (code) => {
   }
 }
 
+export const CodeToJenisPemberiKerja = (code) => {
+  switch(code) {
+    case Constants.JENIS_PEMBERI_KERJA_PEMERINTAH_PUSAT:
+      return "Pemerintah Pusat"
+    case Constants.JENIS_PEMBERI_KERJA_PEMERINTAH_DAERAH:
+      return "Pemerintah Daerah"
+    case Constants.JENIS_PEMBERI_KERJA_BUMN_BUMD_BHMN:
+      return "BUMN BUMD BHMN"
+    case Constants.JENIS_PEMBERI_KERJA_SWASTA:
+      return "Swasta"
+    case Constants.JENIS_PEMBERI_KERJA_LAIN_LAIN:
+      return "Lain - lain"
+    default:
+      return ''
+  }
+}
+
 export default []
