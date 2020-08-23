@@ -36,7 +36,7 @@ function Header(props) {
         <TableCell
           key="total-head"
           align="center"
-          style={{ minWidth: 70 }}
+          style={{ minWidth: 70, top: 57 }}
           rowSpan={2}
         >
           Jumlah Proyek
@@ -44,7 +44,7 @@ function Header(props) {
         <TableCell
           key="total-nilai-head"
           align="center"
-          style={{ minWidth: 70 }}
+          style={{ minWidth: 70, top: 57 }}
         >
           Nilai Kontrak Tidak Termasuk PPN
         </TableCell>
@@ -53,7 +53,7 @@ function Header(props) {
         <TableCell
           key="rupiah-nilai-head"
           align="center"
-          style={{ minWidth: 70 }}
+          style={{ minWidth: 70, top: 114 }}
         >
           IDR
         </TableCell>
