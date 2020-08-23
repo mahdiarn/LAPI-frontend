@@ -33,4 +33,19 @@ export const CodeToJenisPemberiKerja = (code) => {
   }
 }
 
+export const CodeToKlasifikasiProyek = (code) => {
+  switch(code) {
+    case Constants.PROYEK_KLASIFIKASI_KONSULTAN:
+      return "Konsultan"
+    case Constants.PROYEK_KLASIFIKASI_PELATIHAN:
+      return "Pelatihan"
+    case Constants.PROYEK_KLASIFIKASI_PENGEMBANGAN_TEKNOLOGI:
+      return "Pengembangan Tepat Guna"
+    case Constants.PROYEK_KLASIFIKASI_PENGUJIAN:
+      return "Pengujian"
+    default:
+      return ''
+  }
+}
+
 export default []
