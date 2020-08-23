@@ -2,10 +2,22 @@ import React, { useEffect, useState } from 'react'
 
 import { TableBody, TableRow, TableCell } from '@material-ui/core'
 
+import * as moment from 'moment'
+
 import {RomawiFormat, RupiahFormat} from '../../../Shared/TextTransformer'
 import APIBuilder from '../../../Shared/APIBuilder'
-import {daftarLaporanJenisPengadaanPerTahun, daftarLaporanJenisPemberiKerjaPerTahun, daftarLaporanKlasifikasiProyekPerTahun} from '../../../Shared/Columns'
-import {CodeToJenisPengadaan, CodeToJenisPemberiKerja, CodeToKlasifikasiProyek} from '../../../Shared/CodeToName'
+
+import {
+  daftarLaporanJenisPengadaanPerTahun,
+  daftarLaporanJenisPemberiKerjaPerTahun,
+  daftarLaporanKlasifikasiProyekPerTahun,
+  daftarLaporanBulananPerTahun,
+} from '../../../Shared/Columns'
+import {
+  CodeToJenisPengadaan,
+  CodeToJenisPemberiKerja,
+  CodeToKlasifikasiProyek,
+} from '../../../Shared/CodeToName'
 
 function SubTable(props) {
   const [data, setData] = useState([])
@@ -19,6 +31,8 @@ function SubTable(props) {
         return setColumns(daftarLaporanJenisPemberiKerjaPerTahun)
       case 'klasifikasi_proyek':
         return setColumns(daftarLaporanKlasifikasiProyekPerTahun)
+      case 'bulan':
+        return setColumns(daftarLaporanBulananPerTahun)
       default:
         return setColumns([])
     }
@@ -49,6 +63,8 @@ function SubTable(props) {
         return CodeToJenisPemberiKerja(row['jenis_pemberi_kerja'])
       case 'nama_klasifikasi_proyek':
         return CodeToKlasifikasiProyek(row['klasifikasi_proyek'])
+      case 'bulan':
+        return moment().month(row['bulan']-1).locale('ID').format('MMMM')
       case 'total_nilai_proyek':
         return RupiahFormat(value)
       default:
