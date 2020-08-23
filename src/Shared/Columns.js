@@ -183,3 +183,11 @@ export const daftarLaporanJenisPengadaanPerTahun = [
   { id: 'total_proyek', label: 'Jumlah Proyek', minWidth: 50, align: 'center' },
   { id: 'total_nilai_proyek', label: 'Nilai Pencapaian', minWidth: 50 },
 ]
+
+export const daftarLaporanJenisPemberiKerjaPerTahun = [
+  { id: '', label: '', minWidth: 0 },
+  { id: 'jenis_pemberi_kerja', label: 'Instansi', minWidth: 25 },
+  { id: 'nama_jenis_pemberi_kerja', label: 'Uraian', minWidth: 50 },
+  { id: 'total_proyek', label: 'Jumlah Proyek', minWidth: 50, align: 'center' },
+  { id: 'total_nilai_proyek', label: 'Nilai Pencapaian', minWidth: 50 },
+]
