@@ -42,6 +42,15 @@ function ReportProyekPerYear(props) {
           year={year}
           category="klasifikasi_proyek"
         />
+        <SubTable
+          index={4}
+          title="Proyek Berdasarkan Bulan Tercatat Proyek"
+          url={'proyek/amount-by-month'}
+          headTitleAlign="left"
+          headIndexAlign="center"
+          year={year}
+          category="bulan"
+        />
       </Table>
     </div>
   )
