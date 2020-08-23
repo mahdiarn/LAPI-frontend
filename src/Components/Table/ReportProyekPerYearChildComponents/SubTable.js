@@ -4,8 +4,8 @@ import { TableBody, TableRow, TableCell } from '@material-ui/core'
 
 import {RomawiFormat, RupiahFormat} from '../../../Shared/TextTransformer'
 import APIBuilder from '../../../Shared/APIBuilder'
-import {daftarLaporanJenisPengadaanPerTahun} from '../../../Shared/Columns'
-import {CodeToJenisPengadaan} from '../../../Shared/CodeToName'
+import {daftarLaporanJenisPengadaanPerTahun, daftarLaporanJenisPemberiKerjaPerTahun} from '../../../Shared/Columns'
+import {CodeToJenisPengadaan, CodeToJenisPemberiKerja} from '../../../Shared/CodeToName'
 
 function SubTable(props) {
   const [data, setData] = useState([])
@@ -15,6 +15,8 @@ function SubTable(props) {
     switch (tableCategory) {
       case 'pengadaan':
         return setColumns(daftarLaporanJenisPengadaanPerTahun)
+      case 'jenis_pemberi_kerja':
+        return setColumns(daftarLaporanJenisPemberiKerjaPerTahun)
       default:
         return setColumns([])
     }
@@ -41,6 +43,8 @@ function SubTable(props) {
     switch (column.id) {
       case 'nama_pengadaan':
         return CodeToJenisPengadaan(row['pengadaan'])
+      case 'nama_jenis_pemberi_kerja':
+        return CodeToJenisPemberiKerja(row['jenis_pemberi_kerja'])
       case 'total_nilai_proyek':
         return RupiahFormat(value)
       default:
