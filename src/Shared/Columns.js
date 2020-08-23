@@ -199,3 +199,11 @@ export const daftarLaporanKlasifikasiProyekPerTahun = [
   { id: 'total_proyek', label: 'Jumlah Proyek', minWidth: 50, align: 'center' },
   { id: 'total_nilai_proyek', label: 'Nilai Pencapaian', minWidth: 50 },
 ]
+
+export const daftarLaporanBulananPerTahun = [
+  { id: '', label: '', minWidth: 0 },
+  { id: 'bulan', label: 'Bulan', minWidth: 25 },
+  { id: 'nama_bulan', label: 'Uraian', minWidth: 50 },
+  { id: 'total_proyek', label: 'Jumlah Proyek', minWidth: 50, align: 'center' },
+  { id: 'total_nilai_proyek', label: 'Nilai Pencapaian', minWidth: 50 },
+]
